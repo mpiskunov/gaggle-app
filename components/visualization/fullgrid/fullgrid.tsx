@@ -31,7 +31,7 @@ const FullGrid = () => {
           alwaysShowVerticalScroll
           rowData={rowData}
           columnDefs={GenerateHeaderCols() as any}
-          autoSizeStrategy={autoSizeStrategy as any}
+          gridOptions={{}}
         />
         <AgGridReact
           ref={bottomGrid}
@@ -41,6 +41,10 @@ const FullGrid = () => {
           headerHeight={0}
           alwaysShowVerticalScroll
           rowStyle={{ fontWeight: "bold" }}
+          gridOptions={{
+            rowHeight: 150,
+            defaultColDef: { wrapText: true },
+          }}
         />
       </div>
     </>

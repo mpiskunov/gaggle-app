@@ -1,31 +1,56 @@
 export const GenerateHeaderCols = () => {
   return [
     {
-      headerName: "Gaggler",
-      children: [{ field: "golfer" }, { field: "netTotal" }],
+      headerName: "",
+      children: [
+        {
+          headerName: "",
+          children: [
+            {
+              headerName: "Net Total",
+              field: "netTotal",
+              pinned: "left",
+              resizable: false,
+              width: 90,
+              wrapText: true,
+              type: "rightAligned",
+            },
+            {
+              field: "golfer",
+              pinned: "left",
+              resizable: false,
+              width: 130,
+              type: "rightAligned",
+            },
+          ],
+        },
+      ],
+      field: "netTotal",
+      resizable: false,
     },
     {
       headerName: "Country View",
+      type: "rightAligned",
       children: [
         {
           headerName: "Week 1",
           children: [
-            { field: "handicap" },
-            { field: "actual" },
-            { field: "net" },
+            { field: "handicap", width: 90, type: "rightAligned" },
+            { field: "actual", width: 90, type: "rightAligned" },
+            { field: "net", width: 90, type: "rightAligned" },
           ],
         },
         {
           headerName: "Week 2",
           children: [
-            { field: "handicap" },
-            { field: "actual" },
-            { field: "net" },
+            { field: "handicap", width: 90, type: "rightAligned" },
+            { field: "actual", width: 90, type: "rightAligned" },
+            { field: "net", width: 90, type: "rightAligned" },
           ],
         },
         {
           headerName: "CV",
-          children: [{ field: "Total" }],
+          children: [{ field: "Total", width: 90, type: "rightAligned" }],
         },
       ],
     },
@@ -35,30 +60,30 @@ export const GenerateHeaderCols = () => {
         {
           headerName: "Week 1",
           children: [
-            { field: "handicap" },
-            { field: "actual" },
-            { field: "net" },
+            { field: "handicap", width: 90, type: "rightAligned" },
+            { field: "actual", width: 90, type: "rightAligned" },
+            { field: "net", width: 90, type: "rightAligned" },
           ],
         },
         {
           headerName: "Week 2",
           children: [
-            { field: "handicap" },
-            { field: "actual" },
-            { field: "net" },
+            { field: "handicap", width: 90, type: "rightAligned" },
+            { field: "actual", width: 90, type: "rightAligned" },
+            { field: "net", width: 90, type: "rightAligned" },
           ],
         },
         {
           headerName: "Week 3",
           children: [
-            { field: "handicap" },
-            { field: "actual" },
-            { field: "net" },
+            { field: "handicap", width: 90, type: "rightAligned" },
+            { field: "actual", width: 90, type: "rightAligned" },
+            { field: "net", width: 90, type: "rightAligned" },
           ],
         },
         {
           headerName: "MG",
-          children: [{ field: "Total" }],
+          children: [{ field: "Total", width: 90, type: "rightAligned" }],
         },
       ],
     },
@@ -68,22 +93,22 @@ export const GenerateHeaderCols = () => {
         {
           headerName: "Week 1",
           children: [
-            { field: "handicap" },
-            { field: "actual" },
-            { field: "net" },
+            { field: "handicap", width: 90, type: "rightAligned" },
+            { field: "actual", width: 90, type: "rightAligned" },
+            { field: "net", width: 90, type: "rightAligned" },
           ],
         },
         {
           headerName: "Week 2",
           children: [
-            { field: "handicap" },
-            { field: "actual" },
-            { field: "net" },
+            { field: "handicap", width: 90, type: "rightAligned" },
+            { field: "actual", width: 90, type: "rightAligned" },
+            { field: "net", width: 90, type: "rightAligned" },
           ],
         },
         {
           headerName: "HH",
-          children: [{ field: "Total" }],
+          children: [{ field: "Total", width: 90, type: "rightAligned" }],
         },
       ],
     },
@@ -93,22 +118,22 @@ export const GenerateHeaderCols = () => {
         {
           headerName: "Week 1",
           children: [
-            { field: "handicap" },
-            { field: "actual" },
-            { field: "net" },
+            { field: "handicap", width: 90, type: "rightAligned" },
+            { field: "actual", width: 90, type: "rightAligned" },
+            { field: "net", width: 90, type: "rightAligned" },
           ],
         },
         {
           headerName: "Week 2",
           children: [
-            { field: "handicap" },
-            { field: "actual" },
-            { field: "net" },
+            { field: "handicap", width: 90, type: "rightAligned" },
+            { field: "actual", width: 90, type: "rightAligned" },
+            { field: "net", width: 90, type: "rightAligned" },
           ],
         },
         {
           headerName: "CL",
-          children: [{ field: "Total" }],
+          children: [{ field: "Total", width: 90, type: "rightAligned" }],
         },
       ],
     },
@@ -118,22 +143,38 @@ export const GenerateHeaderCols = () => {
         {
           headerName: "Week 1",
           children: [
-            { field: "handicap" },
-            { field: "actual" },
-            { field: "net" },
+            { field: "handicap", width: 90, type: "rightAligned" },
+            { field: "actual", width: 90, type: "rightAligned" },
+            { field: "net", width: 90, type: "rightAligned" },
           ],
         },
         {
           headerName: "Week 2",
           children: [
-            { field: "handicap" },
-            { field: "actual" },
-            { field: "net" },
+            { field: "handicap", width: 90, type: "rightAligned" },
+            { field: "actual", width: 90, type: "rightAligned" },
+            { field: "net", width: 90, type: "rightAligned" },
           ],
         },
         {
           headerName: "NE",
-          children: [{ field: "Total" }],
+          children: [{ field: "Total", width: 90, type: "rightAligned" }],
+        },
+      ],
+    },
+    {
+      headerName: "",
+      children: [
+        {
+          headerName: "",
+          children: [
+            {
+              headerName: "Final",
+              width: 90,
+              pinned: "right",
+              type: "rightAligned",
+            },
+          ],
         },
       ],
     },
@@ -161,31 +202,38 @@ export const GenerateTableData = () => [
 
 export const GenerateBottomHeaders = () => [
   {
-    headerName: "Gaggler",
-    children: [{ field: "golfer" }, { field: "netTotal" }],
+    headerName: "",
+    resizable: false,
+    children: [
+      { field: "netTotal", pinned: "left", width: 90, type: "rightAligned" },
+      {
+        valueGetter: () => "Birdies",
+        pinned: "left",
+        width: 130,
+        type: "rightAligned",
+      },
+    ],
   },
   {
     headerName: "Country View",
     children: [
       {
         headerName: "Week 1",
-        children: [
-          { field: "handicap" },
-          { field: "actual" },
-          { field: "net" },
-        ],
+        valueGetter: () => "hellwo world",
+        width: 270,
+        type: "rightAligned",
       },
       {
         headerName: "Week 2",
-        children: [
-          { field: "handicap" },
-          { field: "actual" },
-          { field: "net" },
-        ],
+        valueGetter: () => "test",
+        width: 270,
+        type: "rightAligned",
       },
       {
         headerName: "CV",
-        children: [{ field: "Total" }],
+        children: [
+          { valueGetter: () => "test", width: 90, type: "rightAligned" },
+        ],
       },
     ],
   },
@@ -194,31 +242,27 @@ export const GenerateBottomHeaders = () => [
     children: [
       {
         headerName: "Week 1",
-        children: [
-          { field: "handicap" },
-          { field: "actual" },
-          { field: "net" },
-        ],
+        valueGetter: () => "test",
+        width: 270,
+        type: "rightAligned",
       },
       {
         headerName: "Week 2",
-        children: [
-          { field: "handicap" },
-          { field: "actual" },
-          { field: "net" },
-        ],
+        valueGetter: () => "test",
+        width: 270,
+        type: "rightAligned",
       },
       {
         headerName: "Week 3",
-        children: [
-          { field: "handicap" },
-          { field: "actual" },
-          { field: "net" },
-        ],
+        valueGetter: () => "test",
+        width: 270,
+        type: "rightAligned",
       },
       {
         headerName: "MG",
-        children: [{ field: "Total" }],
+        children: [
+          { valueGetter: () => "test", width: 90, type: "rightAligned" },
+        ],
       },
     ],
   },
@@ -227,23 +271,21 @@ export const GenerateBottomHeaders = () => [
     children: [
       {
         headerName: "Week 1",
-        children: [
-          { field: "handicap" },
-          { field: "actual" },
-          { field: "net" },
-        ],
+        valueGetter: () => "test",
+        width: 270,
+        type: "rightAligned",
       },
       {
         headerName: "Week 2",
-        children: [
-          { field: "handicap" },
-          { field: "actual" },
-          { field: "net" },
-        ],
+        valueGetter: () => "test",
+        width: 270,
+        type: "rightAligned",
       },
       {
         headerName: "HH",
-        children: [{ field: "Total" }],
+        children: [
+          { valueGetter: () => "test", width: 90, type: "rightAligned" },
+        ],
       },
     ],
   },
@@ -252,23 +294,21 @@ export const GenerateBottomHeaders = () => [
     children: [
       {
         headerName: "Week 1",
-        children: [
-          { field: "handicap" },
-          { field: "actual" },
-          { field: "net" },
-        ],
+        valueGetter: () => "test",
+        width: 270,
+        type: "rightAligned",
       },
       {
         headerName: "Week 2",
-        children: [
-          { field: "handicap" },
-          { field: "actual" },
-          { field: "net" },
-        ],
+        valueGetter: () => "test",
+        width: 270,
+        type: "rightAligned",
       },
       {
         headerName: "CL",
-        children: [{ field: "Total" }],
+        children: [
+          { valueGetter: () => "test", width: 90, type: "rightAligned" },
+        ],
       },
     ],
   },
@@ -277,23 +317,37 @@ export const GenerateBottomHeaders = () => [
     children: [
       {
         headerName: "Week 1",
-        children: [
-          { field: "handicap" },
-          { field: "actual" },
-          { field: "net" },
-        ],
+        valueGetter: () => "test",
+        width: 270,
+        type: "rightAligned",
       },
       {
         headerName: "Week 2",
-        children: [
-          { field: "handicap" },
-          { field: "actual" },
-          { field: "net" },
-        ],
+        valueGetter: () => "test",
+        width: 270,
+        type: "rightAligned",
       },
       {
         headerName: "NE",
-        children: [{ field: "Total" }],
+        children: [
+          { valueGetter: () => "test", width: 90, type: "rightAligned" },
+        ],
+      },
+    ],
+  },
+  {
+    headerName: "",
+    children: [
+      {
+        headerName: "",
+        children: [
+          {
+            valueGetter: () => "Winner!",
+            width: 90,
+            pinned: "right",
+            type: "rightAligned",
+          },
+        ],
       },
     ],
   },
