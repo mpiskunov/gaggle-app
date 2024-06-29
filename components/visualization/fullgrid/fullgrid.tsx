@@ -12,7 +12,6 @@ import {
 } from "./helpers";
 
 const FullGrid = () => {
-  // Row Data: The data to be displayed.
   const [rowData, setRowData] = useState(GenerateTableData());
   const [bottomRowData, setBottomRowData] = useState(GenerateBottomTableData());
   const topGrid = useRef<AgGridReact>(null);
@@ -38,23 +37,12 @@ const FullGrid = () => {
           ref={bottomGrid}
           alignedGrids={[topGrid]}
           rowData={bottomRowData}
-          columnDefs={GenerateHeaderCols() as any}
+          columnDefs={GenerateBottomHeaders() as any}
           headerHeight={0}
           alwaysShowVerticalScroll
           rowStyle={{ fontWeight: "bold" }}
         />
       </div>
-      {/* </div>
-      <div>
-        <AgGridReact
-          ref={bottomGrid}
-          alignedGrids={[topGrid]}
-          headerHeight={0}
-          alwaysShowVerticalScroll
-          rowData={bottomRowData}
-          columnDefs={GenerateHeaderCols() as any}
-        />
-      </div> */}
     </>
   );
 };
