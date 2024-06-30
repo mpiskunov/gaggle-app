@@ -29,7 +29,7 @@ const FullGrid = () => {
             defaultColDef: { resizable: false },
           }}
         />
-        <AgGridReact
+        {/* <AgGridReact
           ref={bottomGrid}
           alignedGrids={[topGrid]}
           rowData={bottomRowData}
@@ -42,7 +42,7 @@ const FullGrid = () => {
             rowHeight: 150,
             defaultColDef: { wrapText: true },
           }}
-        />
+        /> */}
       </div>
     </>
   );
