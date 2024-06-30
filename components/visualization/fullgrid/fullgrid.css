@@ -21,18 +21,12 @@
     justify-content: center;
 } */
 .example-container {
-  height: 800px;
+  height: 700px;
 }
 @media (min-width: 576px) {
-  .example-container {
-    height: 800px;
-  }
 }
 
 @media (min-width: 768px) {
-  .example-container {
-    height: 800px;
-  }
 }
 
 @media (min-width: 992px) {
