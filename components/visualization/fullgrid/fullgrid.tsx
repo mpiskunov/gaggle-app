@@ -17,7 +17,7 @@ const FullGrid = () => {
   const topGrid = useRef<AgGridReact>(null);
   const bottomGrid = useRef<AgGridReact>(null);
   const baseClassName = "example-container";
-  const themeClassName = "ag-theme-quartz-dark";
+  const themeClassName = "ag-theme-quartz";
   return (
     <>
       <div
@@ -31,7 +31,9 @@ const FullGrid = () => {
           alwaysShowVerticalScroll
           rowData={rowData}
           columnDefs={GenerateHeaderCols() as any}
-          gridOptions={{}}
+          gridOptions={{
+            defaultColDef: { resizable: false },
+          }}
         />
         <AgGridReact
           ref={bottomGrid}
