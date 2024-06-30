@@ -7,22 +7,22 @@ export const GenerateHeaderCols = () => {
           headerName: "",
           children: [
             {
-              headerName: "Net Total",
+              headerName: "NT",
               field: "netTotal",
               pinned: "left",
               resizable: false,
-              width: 90,
+              width: 40,
               wrapText: true,
               type: "rightAligned",
-              cellStyle: { "background-color": "#a8ffa8" },
+              cellStyle: { backgroundColor: "#a8ffa8" },
             },
             {
               field: "golfer",
               pinned: "left",
               resizable: false,
-              width: 130,
+              width: 80,
               type: "rightAligned",
-              cellStyle: { "background-color": "#a8ffa8" },
+              cellStyle: { backgroundColor: "#a8ffa8" },
             },
           ],
         },
@@ -38,20 +38,21 @@ export const GenerateHeaderCols = () => {
           headerName: "Week 1",
           children: [
             {
-              field: "handicap",
-              width: 90,
+              headerName: "HC",
+              field: "hc",
+              width: 60,
               type: "rightAligned",
-              cellStyle: { "background-color": "#f8ffa8" }, //#ffa8ad
+              cellStyle: { backgroundColor: "#f8ffa8" }, //#ffa8ad
             },
             {
               field: "actual",
-              width: 90,
+              width: 60,
               type: "rightAligned",
-              cellStyle: { "background-color": "#ffa8ad" }, //#a8ffa8
+              cellStyle: { backgroundColor: "#ffa8ad" }, //#a8ffa8
             },
             {
               field: "net",
-              width: 90,
+              width: 60,
               type: "rightAligned",
             },
           ],
@@ -60,20 +61,22 @@ export const GenerateHeaderCols = () => {
           headerName: "Week 2",
           children: [
             {
-              field: "handicap",
-              width: 90,
+              headerName: "HC",
+
+              field: "hc",
+              width: 60,
               type: "rightAligned",
-              cellStyle: { "background-color": "#f8ffa8" },
+              cellStyle: { backgroundColor: "#f8ffa8" },
             },
             {
               field: "actual",
-              width: 90,
+              width: 60,
               type: "rightAligned",
-              cellStyle: { "background-color": "#ffa8ad" },
+              cellStyle: { backgroundColor: "#ffa8ad" },
             },
             {
               field: "net",
-              width: 90,
+              width: 60,
               type: "rightAligned",
             },
           ],
@@ -83,9 +86,9 @@ export const GenerateHeaderCols = () => {
           children: [
             {
               field: "Total",
-              width: 90,
+              width: 60,
               type: "rightAligned",
-              cellStyle: { "background-color": "#a8ffa8" },
+              cellStyle: { backgroundColor: "#a8ffa8" },
             },
           ],
         },
@@ -98,20 +101,22 @@ export const GenerateHeaderCols = () => {
           headerName: "Week 1",
           children: [
             {
-              field: "handicap",
-              width: 90,
+              headerName: "HC",
+
+              field: "hc",
+              width: 60,
               type: "rightAligned",
-              cellStyle: { "background-color": "#f8ffa8" },
+              cellStyle: { backgroundColor: "#f8ffa8" },
             },
             {
               field: "actual",
-              width: 90,
+              width: 60,
               type: "rightAligned",
-              cellStyle: { "background-color": "#ffa8ad" },
+              cellStyle: { backgroundColor: "#ffa8ad" },
             },
             {
               field: "net",
-              width: 90,
+              width: 60,
               type: "rightAligned",
             },
           ],
@@ -120,20 +125,22 @@ export const GenerateHeaderCols = () => {
           headerName: "Week 2",
           children: [
             {
-              field: "handicap",
-              width: 90,
+              headerName: "HC",
+
+              field: "hc",
+              width: 60,
               type: "rightAligned",
-              cellStyle: { "background-color": "#f8ffa8" },
+              cellStyle: { backgroundColor: "#f8ffa8" },
             },
             {
               field: "actual",
-              width: 90,
+              width: 60,
               type: "rightAligned",
-              cellStyle: { "background-color": "#ffa8ad" },
+              cellStyle: { backgroundColor: "#ffa8ad" },
             },
             {
               field: "net",
-              width: 90,
+              width: 60,
               type: "rightAligned",
             },
           ],
@@ -142,20 +149,22 @@ export const GenerateHeaderCols = () => {
           headerName: "Week 3",
           children: [
             {
-              field: "handicap",
-              width: 90,
+              headerName: "HC",
+
+              field: "hc",
+              width: 60,
               type: "rightAligned",
-              cellStyle: { "background-color": "#f8ffa8" },
+              cellStyle: { backgroundColor: "#f8ffa8" },
             },
             {
               field: "actual",
-              width: 90,
+              width: 60,
               type: "rightAligned",
-              cellStyle: { "background-color": "#ffa8ad" },
+              cellStyle: { backgroundColor: "#ffa8ad" },
             },
             {
               field: "net",
-              width: 90,
+              width: 60,
               type: "rightAligned",
             },
           ],
@@ -165,9 +174,9 @@ export const GenerateHeaderCols = () => {
           children: [
             {
               field: "Total",
-              width: 90,
+              width: 60,
               type: "rightAligned",
-              cellStyle: { "background-color": "#a8ffa8" },
+              cellStyle: { backgroundColor: "#a8ffa8" },
             },
           ],
         },
@@ -180,20 +189,22 @@ export const GenerateHeaderCols = () => {
           headerName: "Week 1",
           children: [
             {
-              field: "handicap",
-              width: 90,
+              headerName: "HC",
+
+              field: "hc",
+              width: 60,
               type: "rightAligned",
-              cellStyle: { "background-color": "#f8ffa8" },
+              cellStyle: { backgroundColor: "#f8ffa8" },
             },
             {
               field: "actual",
-              width: 90,
+              width: 60,
               type: "rightAligned",
-              cellStyle: { "background-color": "#ffa8ad" },
+              cellStyle: { backgroundColor: "#ffa8ad" },
             },
             {
               field: "net",
-              width: 90,
+              width: 60,
               type: "rightAligned",
             },
           ],
@@ -202,20 +213,22 @@ export const GenerateHeaderCols = () => {
           headerName: "Week 2",
           children: [
             {
-              field: "handicap",
-              width: 90,
+              headerName: "HC",
+
+              field: "hc",
+              width: 60,
               type: "rightAligned",
-              cellStyle: { "background-color": "#f8ffa8" },
+              cellStyle: { backgroundColor: "#f8ffa8" },
             },
             {
               field: "actual",
-              width: 90,
+              width: 60,
               type: "rightAligned",
-              cellStyle: { "background-color": "#ffa8ad" },
+              cellStyle: { backgroundColor: "#ffa8ad" },
             },
             {
               field: "net",
-              width: 90,
+              width: 60,
               type: "rightAligned",
             },
           ],
@@ -225,9 +238,9 @@ export const GenerateHeaderCols = () => {
           children: [
             {
               field: "Total",
-              width: 90,
+              width: 60,
               type: "rightAligned",
-              cellStyle: { "background-color": "#a8ffa8" },
+              cellStyle: { backgroundColor: "#a8ffa8" },
             },
           ],
         },
@@ -240,20 +253,22 @@ export const GenerateHeaderCols = () => {
           headerName: "Week 1",
           children: [
             {
-              field: "handicap",
-              width: 90,
+              headerName: "HC",
+
+              field: "hc",
+              width: 60,
               type: "rightAligned",
-              cellStyle: { "background-color": "#f8ffa8" },
+              cellStyle: { backgroundColor: "#f8ffa8" },
             },
             {
               field: "actual",
-              width: 90,
+              width: 60,
               type: "rightAligned",
-              cellStyle: { "background-color": "#ffa8ad" },
+              cellStyle: { backgroundColor: "#ffa8ad" },
             },
             {
               field: "net",
-              width: 90,
+              width: 60,
               type: "rightAligned",
             },
           ],
@@ -262,20 +277,22 @@ export const GenerateHeaderCols = () => {
           headerName: "Week 2",
           children: [
             {
-              field: "handicap",
-              width: 90,
+              headerName: "HC",
+
+              field: "hc",
+              width: 60,
               type: "rightAligned",
-              cellStyle: { "background-color": "#f8ffa8" },
+              cellStyle: { backgroundColor: "#f8ffa8" },
             },
             {
               field: "actual",
-              width: 90,
+              width: 60,
               type: "rightAligned",
-              cellStyle: { "background-color": "#ffa8ad" },
+              cellStyle: { backgroundColor: "#ffa8ad" },
             },
             {
               field: "net",
-              width: 90,
+              width: 60,
               type: "rightAligned",
             },
           ],
@@ -285,9 +302,9 @@ export const GenerateHeaderCols = () => {
           children: [
             {
               field: "Total",
-              width: 90,
+              width: 60,
               type: "rightAligned",
-              cellStyle: { "background-color": "#a8ffa8" },
+              cellStyle: { backgroundColor: "#a8ffa8" },
             },
           ],
         },
@@ -300,20 +317,22 @@ export const GenerateHeaderCols = () => {
           headerName: "Week 1",
           children: [
             {
-              field: "handicap",
-              width: 90,
+              headerName: "HC",
+
+              field: "hc",
+              width: 60,
               type: "rightAligned",
-              cellStyle: { "background-color": "#f8ffa8" },
+              cellStyle: { backgroundColor: "#f8ffa8" },
             },
             {
               field: "actual",
-              width: 90,
+              width: 60,
               type: "rightAligned",
-              cellStyle: { "background-color": "#ffa8ad" },
+              cellStyle: { backgroundColor: "#ffa8ad" },
             },
             {
               field: "net",
-              width: 90,
+              width: 60,
               type: "rightAligned",
             },
           ],
@@ -322,20 +341,22 @@ export const GenerateHeaderCols = () => {
           headerName: "Week 2",
           children: [
             {
-              field: "handicap",
-              width: 90,
+              headerName: "HC",
+
+              field: "hc",
+              width: 60,
               type: "rightAligned",
-              cellStyle: { "background-color": "#f8ffa8" },
+              cellStyle: { backgroundColor: "#f8ffa8" },
             },
             {
               field: "actual",
-              width: 90,
+              width: 60,
               type: "rightAligned",
-              cellStyle: { "background-color": "#ffa8ad" },
+              cellStyle: { backgroundColor: "#ffa8ad" },
             },
             {
               field: "net",
-              width: 90,
+              width: 60,
               type: "rightAligned",
             },
           ],
@@ -345,9 +366,9 @@ export const GenerateHeaderCols = () => {
           children: [
             {
               field: "Total",
-              width: 90,
+              width: 60,
               type: "rightAligned",
-              cellStyle: { "background-color": "#a8ffa8" },
+              cellStyle: { backgroundColor: "#a8ffa8" },
             },
           ],
         },
@@ -361,10 +382,10 @@ export const GenerateHeaderCols = () => {
           children: [
             {
               headerName: "Final",
-              width: 90,
+              width: 60,
               pinned: "right",
               type: "rightAligned",
-              cellStyle: { "background-color": "#4ec74e" },
+              cellStyle: { backgroundColor: "#4ec74e" },
             },
           ],
         },
@@ -374,22 +395,22 @@ export const GenerateHeaderCols = () => {
 };
 
 export const GenerateTableData = () => [
-  { golfer: "Jacob", handicap: "24", actual: "41", net: "29", netTotal: "30" },
-  { golfer: "Ed", handicap: "23", actual: "41", net: "29", netTotal: "30" },
-  { golfer: "Jacob", handicap: "24", actual: "41", net: "29", netTotal: "30" },
-  { golfer: "Ed", handicap: "23", actual: "41", net: "29", netTotal: "30" },
-  { golfer: "Jacob", handicap: "24", actual: "41", net: "29", netTotal: "30" },
-  { golfer: "Ed", handicap: "23", actual: "41", net: "29", netTotal: "30" },
-  { golfer: "Jacob", handicap: "24", actual: "41", net: "29", netTotal: "30" },
-  { golfer: "Ed", handicap: "23", actual: "41", net: "29", netTotal: "30" },
-  { golfer: "Jacob", handicap: "24", actual: "41", net: "29", netTotal: "30" },
-  { golfer: "Ed", handicap: "23", actual: "41", net: "29", netTotal: "30" },
-  { golfer: "Jacob", handicap: "24", actual: "41", net: "29", netTotal: "30" },
-  { golfer: "Ed", handicap: "23", actual: "41", net: "29", netTotal: "30" },
-  { golfer: "Jacob", handicap: "24", actual: "41", net: "29", netTotal: "30" },
-  { golfer: "Ed", handicap: "23", actual: "41", net: "29", netTotal: "30" },
-  { golfer: "Jacob", handicap: "24", actual: "41", net: "29", netTotal: "30" },
-  { golfer: "Ed", handicap: "23", actual: "41", net: "29", netTotal: "30" },
+  { golfer: "Jacob", hc: "24", actual: "41", net: "29", netTotal: "30" },
+  { golfer: "Ed", hc: "23", actual: "41", net: "29", netTotal: "30" },
+  { golfer: "Jacob", hc: "24", actual: "41", net: "29", netTotal: "30" },
+  { golfer: "Ed", hc: "23", actual: "41", net: "29", netTotal: "30" },
+  { golfer: "Jacob", hc: "24", actual: "41", net: "29", netTotal: "30" },
+  { golfer: "Ed", hc: "23", actual: "41", net: "29", netTotal: "30" },
+  { golfer: "Jacob", hc: "24", actual: "41", net: "29", netTotal: "30" },
+  { golfer: "Ed", hc: "23", actual: "41", net: "29", netTotal: "30" },
+  { golfer: "Jacob", hc: "24", actual: "41", net: "29", netTotal: "30" },
+  { golfer: "Ed", hc: "23", actual: "41", net: "29", netTotal: "30" },
+  { golfer: "Jacob", hc: "24", actual: "41", net: "29", netTotal: "30" },
+  { golfer: "Ed", hc: "23", actual: "41", net: "29", netTotal: "30" },
+  { golfer: "Jacob", hc: "24", actual: "41", net: "29", netTotal: "30" },
+  { golfer: "Ed", hc: "23", actual: "41", net: "29", netTotal: "30" },
+  { golfer: "Jacob", hc: "24", actual: "41", net: "29", netTotal: "30" },
+  { golfer: "Ed", hc: "23", actual: "41", net: "29", netTotal: "30" },
 ];
 
 export const GenerateBottomHeaders = () => [
@@ -397,11 +418,11 @@ export const GenerateBottomHeaders = () => [
     headerName: "",
     resizable: false,
     children: [
-      { field: "netTotal", pinned: "left", width: 90, type: "rightAligned" },
+      { field: "netTotal", pinned: "left", width: 60, type: "rightAligned" },
       {
         valueGetter: () => "Birdies",
         pinned: "left",
-        width: 130,
+        width: 60,
         type: "rightAligned",
       },
     ],
@@ -412,20 +433,18 @@ export const GenerateBottomHeaders = () => [
       {
         headerName: "Week 1",
         valueGetter: () => "hellwo world",
-        width: 270,
+        width: 80,
         type: "rightAligned",
       },
       {
         headerName: "Week 2",
         valueGetter: () => "test",
-        width: 270,
+        width: 80,
         type: "rightAligned",
       },
       {
         headerName: "CV",
-        children: [
-          { valueGetter: () => "test", width: 90, type: "rightAligned" },
-        ],
+        children: [{ valueGetter: () => "test", width: 60, type: "rightAligned" }],
       },
     ],
   },
@@ -452,9 +471,7 @@ export const GenerateBottomHeaders = () => [
       },
       {
         headerName: "MG",
-        children: [
-          { valueGetter: () => "test", width: 90, type: "rightAligned" },
-        ],
+        children: [{ valueGetter: () => "test", width: 60, type: "rightAligned" }],
       },
     ],
   },
@@ -475,9 +492,7 @@ export const GenerateBottomHeaders = () => [
       },
       {
         headerName: "HH",
-        children: [
-          { valueGetter: () => "test", width: 90, type: "rightAligned" },
-        ],
+        children: [{ valueGetter: () => "test", width: 60, type: "rightAligned" }],
       },
     ],
   },
@@ -498,9 +513,7 @@ export const GenerateBottomHeaders = () => [
       },
       {
         headerName: "CL",
-        children: [
-          { valueGetter: () => "test", width: 90, type: "rightAligned" },
-        ],
+        children: [{ valueGetter: () => "test", width: 60, type: "rightAligned" }],
       },
     ],
   },
@@ -521,9 +534,7 @@ export const GenerateBottomHeaders = () => [
       },
       {
         headerName: "NE",
-        children: [
-          { valueGetter: () => "test", width: 90, type: "rightAligned" },
-        ],
+        children: [{ valueGetter: () => "test", width: 60, type: "rightAligned" }],
       },
     ],
   },
@@ -535,7 +546,7 @@ export const GenerateBottomHeaders = () => [
         children: [
           {
             valueGetter: () => "Winner!",
-            width: 90,
+            width: 60,
             pinned: "right",
             type: "rightAligned",
           },
@@ -545,6 +556,4 @@ export const GenerateBottomHeaders = () => [
   },
 ];
 
-export const GenerateBottomTableData = () => [
-  { golfer: "Jacob", handicap: "24", actual: "41", net: "29", netTotal: "30" },
-];
+export const GenerateBottomTableData = () => [{ golfer: "Jacob", hc: "24", actual: "41", net: "29", netTotal: "30" }];
