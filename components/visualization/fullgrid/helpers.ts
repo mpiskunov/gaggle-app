@@ -1,3 +1,5 @@
+import { CompanyRenderer } from "@/components/icons/DoveIcon";
+
 export const GenerateHeaderCols = () => {
   return [
     {
@@ -23,6 +25,15 @@ export const GenerateHeaderCols = () => {
               width: 80,
               type: "rightAligned",
               cellStyle: { backgroundColor: "#a8ffa8" },
+            },
+            {
+              field: "flock_order",
+              pinned: "left",
+              resizable: false,
+              width: 100,
+              type: "leftAligned",
+              cellStyle: { backgroundColor: "#a8ffa8" },
+              cellRenderer: CompanyRenderer,
             },
           ],
         },
@@ -395,22 +406,134 @@ export const GenerateHeaderCols = () => {
 };
 
 export const GenerateTableData = () => [
-  { golfer: "Jacob", hc: "24", actual: "41", net: "29", netTotal: "30" },
-  { golfer: "Ed", hc: "23", actual: "41", net: "29", netTotal: "30" },
-  { golfer: "Jacob", hc: "24", actual: "41", net: "29", netTotal: "30" },
-  { golfer: "Ed", hc: "23", actual: "41", net: "29", netTotal: "30" },
-  { golfer: "Jacob", hc: "24", actual: "41", net: "29", netTotal: "30" },
-  { golfer: "Ed", hc: "23", actual: "41", net: "29", netTotal: "30" },
-  { golfer: "Jacob", hc: "24", actual: "41", net: "29", netTotal: "30" },
-  { golfer: "Ed", hc: "23", actual: "41", net: "29", netTotal: "30" },
-  { golfer: "Jacob", hc: "24", actual: "41", net: "29", netTotal: "30" },
-  { golfer: "Ed", hc: "23", actual: "41", net: "29", netTotal: "30" },
-  { golfer: "Jacob", hc: "24", actual: "41", net: "29", netTotal: "30" },
-  { golfer: "Ed", hc: "23", actual: "41", net: "29", netTotal: "30" },
-  { golfer: "Jacob", hc: "24", actual: "41", net: "29", netTotal: "30" },
-  { golfer: "Ed", hc: "23", actual: "41", net: "29", netTotal: "30" },
-  { golfer: "Jacob", hc: "24", actual: "41", net: "29", netTotal: "30" },
-  { golfer: "Ed", hc: "23", actual: "41", net: "29", netTotal: "30" },
+  {
+    golfer: "Jacob",
+    flock_order: 1,
+    hc: "24",
+    actual: "41",
+    net: "29",
+    netTotal: "30",
+  },
+  {
+    golfer: "Ed",
+    flock_order: 2,
+    hc: "23",
+    actual: "41",
+    net: "29",
+    netTotal: "30",
+  },
+  {
+    golfer: "Jacob",
+    flock_order: 3,
+    hc: "24",
+    actual: "41",
+    net: "29",
+    netTotal: "30",
+  },
+  {
+    golfer: "Ed",
+    flock_order: 1,
+    hc: "23",
+    actual: "41",
+    net: "29",
+    netTotal: "30",
+  },
+  {
+    golfer: "Jacob",
+    flock_order: 3,
+    hc: "24",
+    actual: "41",
+    net: "29",
+    netTotal: "30",
+  },
+  {
+    golfer: "Ed",
+    flock_order: 2,
+    hc: "23",
+    actual: "41",
+    net: "29",
+    netTotal: "30",
+  },
+  {
+    golfer: "Jacob",
+    flock_order: 2,
+    hc: "24",
+    actual: "41",
+    net: "29",
+    netTotal: "30",
+  },
+  {
+    golfer: "Ed",
+    flock_order: 4,
+    hc: "23",
+    actual: "41",
+    net: "29",
+    netTotal: "30",
+  },
+  {
+    golfer: "Jacob",
+    flock_order: 1,
+    hc: "24",
+    actual: "41",
+    net: "29",
+    netTotal: "30",
+  },
+  {
+    golfer: "Ed",
+    flock_order: 0,
+    hc: "23",
+    actual: "41",
+    net: "29",
+    netTotal: "30",
+  },
+  {
+    golfer: "Jacob",
+    flock_order: 1,
+    hc: "24",
+    actual: "41",
+    net: "29",
+    netTotal: "30",
+  },
+  {
+    golfer: "Ed",
+    flock_order: 0,
+    hc: "23",
+    actual: "41",
+    net: "29",
+    netTotal: "30",
+  },
+  {
+    golfer: "Jacob",
+    flock_order: 0,
+    hc: "24",
+    actual: "41",
+    net: "29",
+    netTotal: "30",
+  },
+  {
+    golfer: "Ed",
+    flock_order: 1,
+    hc: "23",
+    actual: "41",
+    net: "29",
+    netTotal: "30",
+  },
+  {
+    golfer: "Jacob",
+    flock_order: 3,
+    hc: "24",
+    actual: "41",
+    net: "29",
+    netTotal: "30",
+  },
+  {
+    golfer: "Ed",
+    flock_order: 3,
+    hc: "23",
+    actual: "41",
+    net: "29",
+    netTotal: "30",
+  },
 ];
 
 export const GenerateBottomHeaders = () => [
@@ -444,7 +567,9 @@ export const GenerateBottomHeaders = () => [
       },
       {
         headerName: "CV",
-        children: [{ valueGetter: () => "test", width: 60, type: "rightAligned" }],
+        children: [
+          { valueGetter: () => "test", width: 60, type: "rightAligned" },
+        ],
       },
     ],
   },
@@ -471,7 +596,9 @@ export const GenerateBottomHeaders = () => [
       },
       {
         headerName: "MG",
-        children: [{ valueGetter: () => "test", width: 60, type: "rightAligned" }],
+        children: [
+          { valueGetter: () => "test", width: 60, type: "rightAligned" },
+        ],
       },
     ],
   },
@@ -492,7 +619,9 @@ export const GenerateBottomHeaders = () => [
       },
       {
         headerName: "HH",
-        children: [{ valueGetter: () => "test", width: 60, type: "rightAligned" }],
+        children: [
+          { valueGetter: () => "test", width: 60, type: "rightAligned" },
+        ],
       },
     ],
   },
@@ -513,7 +642,9 @@ export const GenerateBottomHeaders = () => [
       },
       {
         headerName: "CL",
-        children: [{ valueGetter: () => "test", width: 60, type: "rightAligned" }],
+        children: [
+          { valueGetter: () => "test", width: 60, type: "rightAligned" },
+        ],
       },
     ],
   },
@@ -534,7 +665,9 @@ export const GenerateBottomHeaders = () => [
       },
       {
         headerName: "NE",
-        children: [{ valueGetter: () => "test", width: 60, type: "rightAligned" }],
+        children: [
+          { valueGetter: () => "test", width: 60, type: "rightAligned" },
+        ],
       },
     ],
   },
@@ -556,4 +689,6 @@ export const GenerateBottomHeaders = () => [
   },
 ];
 
-export const GenerateBottomTableData = () => [{ golfer: "Jacob", hc: "24", actual: "41", net: "29", netTotal: "30" }];
+export const GenerateBottomTableData = () => [
+  { golfer: "Jacob", hc: "24", actual: "41", net: "29", netTotal: "30" },
+];

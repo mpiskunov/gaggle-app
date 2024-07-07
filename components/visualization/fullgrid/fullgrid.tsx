@@ -6,7 +6,13 @@ import "ag-grid-community/styles/ag-theme-balham.css"; // Optional Theme applied
 import "ag-grid-community/styles/ag-theme-material.css"; // Optional Theme applied to the grid
 import "./fullgrid.css";
 import { useEffect, useRef, useState } from "react";
-import { GenerateBottomHeaders, GenerateBottomTableData, GenerateHeaderCols, GenerateTableData } from "./helpers";
+
+import {
+  GenerateBottomHeaders,
+  GenerateBottomTableData,
+  GenerateHeaderCols,
+  GenerateTableData,
+} from "./helpers";
 
 const FullGrid = () => {
   const [rowData, setRowData] = useState(GenerateTableData());
@@ -17,7 +23,10 @@ const FullGrid = () => {
   const themeClassName = "ag-theme-balham";
   return (
     <>
-      <div style={{ display: "flex", flexDirection: "column" }} className={`${baseClassName} ${themeClassName}`}>
+      <div
+        style={{ display: "flex", flexDirection: "column" }}
+        className={`${baseClassName} ${themeClassName}`}
+      >
         <AgGridReact
           ref={topGrid}
           alignedGrids={[bottomGrid]}

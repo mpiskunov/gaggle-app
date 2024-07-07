@@ -4,7 +4,10 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import NavHeader from "@/components/structure/header/header";
 import Footer from "@/components/structure/footer/footer";
-
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import Head from "next/head";
+config.autoAddCss = false;
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -22,6 +25,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Head>
+        <script
+          src="https://kit.fontawesome.com/gaggleapp.js"
+          crossOrigin="anonymous"
+          async
+        ></script>
+      </Head>
+
       <body
         className={cn(
           "bg-background font-sans antialiased bg-slate-200",
