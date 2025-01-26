@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import NavHeader from "@/components/structure/header/header";
-import Footer from "@/components/structure/footer/footer";
 import { config } from "@fortawesome/fontawesome-svg-core";
+import { ThemeProvider } from "@mui/material/styles";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import Head from "next/head";
+import theme from "@/theme";
+import HeaderSection from "@/components/header/header";
 config.autoAddCss = false;
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -26,23 +28,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Head>
-        <script
-          src="https://kit.fontawesome.com/gaggleapp.js"
-          crossOrigin="anonymous"
-          async
-        ></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Metamorphous&display=swap" rel="stylesheet" />
+        <script src="https://kit.fontawesome.com/gaggleapp.js" crossOrigin="anonymous" async></script>
       </Head>
-
-      <body
-        className={cn(
-          "bg-background font-sans antialiased bg-slate-200",
-          fontSans.variable
-        )}
-      >
-        <NavHeader />
-        {children}
-        <Footer />
-      </body>
+      <AppRouterCacheProvider>
+        <ThemeProvider theme={theme}>
+          <body className={cn("bg-background font-sans antialiased bg-slate-200", fontSans.variable)}>
+            <HeaderSection />
+            {children}
+          </body>
+        </ThemeProvider>
+      </AppRouterCacheProvider>
     </html>
   );
 }
