@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  /* background-image: url("/gaggle-icons/GagFlag-trimmed.gif");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 70% 50%;
+  background-size: contain; */
+}
+
 @font-face {
   font-family: "Metamorphous";
   src: url("/fonts/Metamorphous/Metamorphous-Regular.ttf") format("truetype");

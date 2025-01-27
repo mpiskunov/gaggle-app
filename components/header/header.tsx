@@ -20,12 +20,20 @@ const navItems = [
     href: "/",
   },
   {
-    title: "resume",
-    href: "/resume",
+    title: "about",
+    href: "/about",
   },
   {
-    title: "portfolio",
-    href: "/portfolio",
+    title: "gagglery",
+    href: "/gagglery",
+  },
+  {
+    title: "merch?",
+    href: "/merch",
+  },
+  {
+    title: "grid",
+    href: "/grid",
   },
 ];
 
@@ -66,13 +74,13 @@ export default function HeaderSection(props: Props) {
 
   return (
     <Box sx={{ display: "flex" }} className={props.isSticky ? "sticky" : ""} zIndex={1000}>
-      <AppBar component="nav" position="sticky" sx={{ bgcolor: `primary.dark`, color: `text.primary` }}>
+      <AppBar component="nav" position="sticky" sx={{ bgcolor: `primary.light`, color: `text.primary` }}>
         <Toolbar>
           <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={handleDrawerToggle} sx={{ mr: 2, display: { sm: "none" } }}>
             <MenuIcon />
           </IconButton>
           <Typography variant="h5" component="div" sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}>
-            Matthew Piskunov | Portfolio
+            The Golf Gaggle
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
