@@ -6,6 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { Typography } from "@mui/material";
 
 function createData(netTotal: number, gaggler: string, flockNumber: number) {
   return { netTotal, gaggler, flockNumber };
@@ -33,8 +34,15 @@ const rows = [
 export default function BasicTable() {
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 100 }} aria-label="simple table">
+      <Table sx={{ minWidth: 200 }} aria-label="simple table">
         <TableHead>
+          <TableRow>
+            <TableCell>
+              <Typography variant="h5">PECKING ORDER</Typography>
+            </TableCell>
+            <TableCell></TableCell>
+            <TableCell></TableCell>
+          </TableRow>
           <TableRow>
             <TableCell>NET TOTAL</TableCell>
             <TableCell align="right">GAGGLER</TableCell>

@@ -69,7 +69,7 @@ const Home = () => {
         </Grid2>
         <Grid2 container sx={{ bgcolor: `primary.light` }} justifyContent={"center"} alignItems={"center"} pb={5}>
           <Grid2 size={{ xs: 12, sm: 3, md: 3 }} textAlign={"center"} sx={{ bgcolor: `primary.light` }}></Grid2>
-          <Grid2 size={{ xs: 12, sm: 12, md: 2 }} textAlign={"center"} sx={{ bgcolor: `primary.light` }} position={"relative"} zIndex={12}>
+          <Grid2 size={{ xs: 12, sm: 12, md: 5, lg: 3 }} textAlign={"center"} sx={{ bgcolor: `primary.light` }} position={"relative"} zIndex={12}>
             <BasicTable />
           </Grid2>
           <Grid2 size={{ xs: 12, sm: 3, md: 3 }} textAlign={"center"} sx={{ bgcolor: `primary.light` }}>
