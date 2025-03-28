@@ -1,14 +1,27 @@
+import { Box, Grid2, Typography } from "@mui/material";
+import Image from "next/image";
+
 const AboutPage = () => {
   return (
     <>
-      <div className="container" style={{ minHeight: "100vh" }}>
-        <div className="grid grid-cols-4 gap-4 place-content-center h-48 bg-slate-400">
-          <div>01</div>
-          <div>02</div>
-          <div>03</div>
-          <div>04</div>
-        </div>
-      </div>
+      <Box sx={{ width: "100%", bgcolor: `primary.light` }}>
+        <Grid2 container justifyContent={"center"} alignItems={"center"} py={4} borderBottom={"1px solid black"}>
+          <Grid2 size={12} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <Image src="/gaggle-icons/commissioner.jpg" height="800" width="800" alt="gaggle"></Image>
+          </Grid2>
+          <Grid2 pt={2} size={12} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <Typography variant="h4">
+              <i>&quot;Where fowl play is par for the course&quot;</i>
+            </Typography>
+          </Grid2>
+
+          <Grid2 pt={2} size={12} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <Typography variant="h4">
+              <i>&quot;Where fowl play is par for the course&quot;</i>
+            </Typography>
+          </Grid2>
+        </Grid2>
+      </Box>
     </>
   );
 };

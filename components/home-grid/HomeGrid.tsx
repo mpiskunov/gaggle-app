@@ -34,19 +34,29 @@ const rows = [
 export default function BasicTable() {
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 200 }} aria-label="simple table">
+      <Table sx={{ minWidth: 150 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>
+            <TableCell align="center" colSpan={3}>
               <Typography variant="h5">PECKING ORDER</Typography>
             </TableCell>
-            <TableCell></TableCell>
-            <TableCell></TableCell>
           </TableRow>
           <TableRow>
-            <TableCell>NET TOTAL</TableCell>
-            <TableCell align="right">GAGGLER</TableCell>
-            <TableCell align="right">FLOCK</TableCell>
+            <TableCell>
+              <Typography>
+                <b>NET TOTAL</b>
+              </Typography>
+            </TableCell>
+            <TableCell>
+              <Typography>
+                <b>GAGGLER</b>
+              </Typography>
+            </TableCell>
+            <TableCell align="right">
+              <Typography>
+                <b>FLOCK</b>
+              </Typography>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -55,7 +65,7 @@ export default function BasicTable() {
               <TableCell component="th" scope="row">
                 {row.netTotal}
               </TableCell>
-              <TableCell align="right">{row.gaggler}</TableCell>
+              <TableCell>{row.gaggler}</TableCell>
               <TableCell align="right">{Array.from({ length: row.flockNumber }, (_, i) => "I ")}</TableCell>
             </TableRow>
           ))}

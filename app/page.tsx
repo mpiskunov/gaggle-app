@@ -74,7 +74,7 @@ const Home = () => {
           </Grid2>
           <Grid2 size={{ xs: 12, sm: 3, md: 3 }} textAlign={"center"} sx={{ bgcolor: `primary.light` }}>
             {/* <div style={{ display: "flex", justifyContent: "center" }}> </div> */}
-            <Image src={"/gaggle-icons/GagFlag.gif"} alt="Main Logo" width={700} height={700} style={{ position: "relative", zIndex: 13, left: "-30%", marginTop: "-10%" }} />
+            {/* <Image src={"/gaggle-icons/GagFlag.gif"} alt="Main Logo" width={700} height={700} style={{ position: "relative", zIndex: 13, left: "-30%", marginTop: "-10%" }} /> */}
           </Grid2>
         </Grid2>
       </Box>
