@@ -32,7 +32,7 @@ const Home = () => {
         </Grid2>
       </Box> */}
       <Box sx={{ width: "100%", height: { xs: "100vh", sm: "85vh", borderTop: "1px solid black" } }} style={{ minHeight: "700px" }}>
-        <Grid2 container justifyContent={"center"} spacing={2} px={3} position={"relative"} top={"-80px"} height={{ xs: "100vh", sm: "85vh" }}>
+        <Grid2 container justifyContent={"center"} spacing={2} px={3} position={"relative"} top={"-80px"} height={{ xs: "75vh", sm: "75vh" }}>
           <Grid2 size={{ xs: 12, sm: 12, md: 12 }} textAlign={"center"}>
             <div
               style={{
