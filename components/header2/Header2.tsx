@@ -14,8 +14,35 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Icon, Button } from "@mui/material";
 import Image from "next/image";
-const pages = ["Home", "Gagglery", "About"];
+import Link from "next/link";
+const pages = ["Home", "Gagglery", "About", "Rules"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const navItems = [
+  {
+    title: "home",
+    href: "/",
+  },
+  {
+    title: "about",
+    href: "/about",
+  },
+  // {
+  //   title: "gagglery",
+  //   href: "/gagglery",
+  // },
+  {
+    title: "rules",
+    href: "/rules",
+  },
+  // {
+  //   title: "grid",
+  //   href: "/grid",
+  // },
+  {
+    title: "contact",
+    href: "/contact",
+  },
+];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -100,9 +127,9 @@ function ResponsiveAppBar() {
             Golf Gaggle
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button key={page} onClick={handleCloseNavMenu} sx={{ my: 2, color: "white", display: "block" }}>
-                {page}
+            {navItems.map((page) => (
+              <Button key={page.title} href={page.href} sx={{ my: 2, color: "white", display: "block" }}>
+                {page.title}
               </Button>
             ))}
           </Box>

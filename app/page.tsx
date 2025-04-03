@@ -32,7 +32,7 @@ const Home = () => {
         </Grid2>
       </Box> */}
       <Box sx={{ width: "100%", height: { xs: "100vh", sm: "85vh", borderTop: "1px solid black" } }} style={{ minHeight: "700px" }}>
-        <Grid2 container justifyContent={"center"} spacing={2} px={3} position={"relative"} top={"-80px"} height={{ xs: "75vh", sm: "75vh" }}>
+        <Grid2 container justifyContent={"center"} spacing={2} px={3} height={{ xs: "75vh", sm: "75vh" }}>
           <Grid2 size={{ xs: 12, sm: 12, md: 12 }} textAlign={"center"}>
             <div
               style={{
@@ -61,7 +61,7 @@ const Home = () => {
               //elevation={12}
             >
               {/* <Image src={"/gaggle-icons/ShooterMcGag-trimmed.png"} alt="Main Logo" width={400} height={400} /> */}
-              <Image src={"/headers/DaysLeft.png"} alt="Main Logo" width={400} height={400} />
+              <Image src={"/headers/DaysLeft2.png"} alt="Main Logo" width={400} height={400} />
             </div>
           </Grid2>
         </Grid2>
