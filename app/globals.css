@@ -3,11 +3,17 @@
 @tailwind utilities;
 
 body {
-  /* background-image: url("/gaggle-icons/GagFlag-trimmed.gif");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: 70% 50%;
-  background-size: contain; */
+  background-image: url("/bg/gaggle-bg2.png");
+  background-repeat: repeat;
+  background-size: 120px 120px;
+  /* background-color: rgba(255,255,255,0.6); */
+  background-blend-mode: color-burn;
+}
+
+.argile-bg {
+  background-image: url("/bg/gaggle-bg2.png");
+  background-repeat: repeat;
+  background-size: 120px 120px;
 }
 
 @font-face {

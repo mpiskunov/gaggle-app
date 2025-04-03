@@ -9,6 +9,7 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import Head from "next/head";
 import theme from "@/theme";
 import HeaderSection from "@/components/header/header";
+import ResponsiveAppBar from "@/components/header2/Header2";
 config.autoAddCss = false;
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -35,8 +36,8 @@ export default function RootLayout({
       </Head>
       <AppRouterCacheProvider>
         <ThemeProvider theme={theme}>
-          <body className={cn("bg-background font-sans antialiased bg-slate-200", fontSans.variable)}>
-            <HeaderSection />
+          <body className={cn("font-sans antialiased bg-slate-200", fontSans.variable)}>
+            <ResponsiveAppBar />
             {children}
           </body>
         </ThemeProvider>

@@ -28,12 +28,16 @@ const navItems = [
     href: "/gagglery",
   },
   {
-    title: "merch?",
-    href: "/merch",
+    title: "rules/regs",
+    href: "/rules",
   },
   {
     title: "grid",
     href: "/grid",
+  },
+  {
+    title: "contact",
+    href: "/contact",
   },
 ];
 
@@ -53,7 +57,7 @@ export default function HeaderSection(props: Props) {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center", bgcolor: "background.default" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        MP Portfolio
+        Golf Gaggle
       </Typography>
       <Divider />
       <List sx={{ bgcolor: "background.default" }}>
@@ -74,7 +78,7 @@ export default function HeaderSection(props: Props) {
 
   return (
     <Box sx={{ display: "flex" }} className={props.isSticky ? "sticky" : ""} zIndex={1000}>
-      <AppBar component="nav" position="sticky" sx={{ bgcolor: `primary.light`, color: `text.primary` }}>
+      <AppBar component="nav" position="sticky" sx={{ bgcolor: `primary.light`, color: `text.primary`, minHeight: "100px" }}>
         <Toolbar>
           <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={handleDrawerToggle} sx={{ mr: 2, display: { sm: "none" } }}>
             <MenuIcon />
