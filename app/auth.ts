@@ -6,9 +6,13 @@ export const authConfig = {
   callbacks: {
     async jwt({ token, account, profile }) {
       // this is where I can access all my jwt properties
+      // console.log(token);
+      // console.log(account);
+      // console.log(profile);
       if (account) {
         //console.log("profile", profile);
         token.accessToken = account.access_token;
+        token.id_token = account.id_token;
         token.id = profile?.sub;
         token.groups = profile?.groups;
         // token.isAdmin = profile?.isAdmin;
@@ -19,6 +23,7 @@ export const authConfig = {
     async session({ session, token }) {
       session.accessToken = token.accessToken;
       session.groups = token.groups;
+      session.id_token = token.id_token;
       // session.gaggle_power_user = token.gaggle_power_user;
       return session;
     },

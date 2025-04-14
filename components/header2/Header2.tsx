@@ -15,6 +15,10 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { Icon, Button } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
+import { signIn, signOut } from "next-auth/react";
+import { Session } from "next-auth";
+import { getSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 const pages = ["Home", "Gagglery", "About", "Rules"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 const navItems = [
@@ -44,7 +48,22 @@ const navItems = [
   },
 ];
 
-function ResponsiveAppBar() {
+const ResponsiveAppBar = () => {
+  const [session, setSession] = useState<Session | null>(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const session = await getSession();
+        console.log(session);
+        setSession(session);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -61,6 +80,31 @@ function ResponsiveAppBar() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleLogout = async () => {
+    const session = await getSession();
+    const authentikLogoutUrl = `${process.env.AUTHENTIK_INSTANCE_URL}`;
+    const postLogoutRedirectUri = `${window.location.origin}/`;
+    // Construct the end-session URL.  Use the URL constructor for easier parameter handling.
+    const endSessionUrl = new URL("/application/o/golf-gaggle/end-session/", "https://pisky.id");
+
+    // Add parameters if provided
+    if (session) {
+      endSessionUrl.searchParams.set("id_token_hint", session.id_token);
+    }
+    endSessionUrl.searchParams.set("redirect", "http://localhost:4000/logout/callback");
+    // await fetch(endSessionUrl.toString(), {
+    //   method: "GET", // Explicitly set the method to GET
+    //   headers: {
+    //     Accept: "application/json", //  Let authentik know we can accept JSON (optional, but good practice)
+    //   },
+    // }).then(async (req) => {
+    //   debugger;
+    //   await signOut({ redirect: true });
+    // });
+    await signOut();
+    window.location.href = endSessionUrl.toString();
   };
 
   return (
@@ -134,9 +178,20 @@ function ResponsiveAppBar() {
             ))}
           </Box>
           <Box sx={{ flexGrow: 0 }}>
-            <Button variant="outlined" sx={{ color: "black", borderColor: "black" }} href="/contact">
-              Login
-            </Button>
+            {session ? (
+              <Button variant="outlined" sx={{ color: "black", borderColor: "black" }} onClick={handleLogout}>
+                Logout
+              </Button>
+            ) : (
+              <Button
+                variant="outlined"
+                sx={{ color: "black", borderColor: "black" }}
+                onClick={() => signIn("authentik", { redirect: true, callbackUrl: "/" })}
+              >
+                Login
+              </Button>
+            )}
+
             {/* <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -170,5 +225,5 @@ function ResponsiveAppBar() {
       </Container>
     </AppBar>
   );
-}
+};
 export default ResponsiveAppBar;
