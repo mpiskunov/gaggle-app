@@ -20,7 +20,11 @@ import { Session } from "next-auth";
 import { getSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 const pages = ["Home", "Gagglery", "About", "Rules"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = [
+  { title: "profile", href: "/profile" },
+  { title: "logout", href: "/api/logout" },
+  { title: "not you?", href: "/logout-federated" },
+];
 const navItems = [
   {
     title: "home",
@@ -30,18 +34,11 @@ const navItems = [
     title: "about",
     href: "/about",
   },
-  // {
-  //   title: "gagglery",
-  //   href: "/gagglery",
-  // },
   {
     title: "rules",
     href: "/rules",
   },
-  // {
-  //   title: "grid",
-  //   href: "/grid",
-  // },
+
   {
     title: "contact",
     href: "/contact",
@@ -82,28 +79,15 @@ const ResponsiveAppBar = () => {
     setAnchorElUser(null);
   };
 
-  const handleLogout = async () => {
+  const handleLogout = async (federated: boolean) => {
+    await signOut({ redirect: !federated });
+    if (!federated) return;
     const session = await getSession();
-    const authentikLogoutUrl = `${process.env.AUTHENTIK_INSTANCE_URL}`;
-    const postLogoutRedirectUri = `${window.location.origin}/`;
-    // Construct the end-session URL.  Use the URL constructor for easier parameter handling.
     const endSessionUrl = new URL("/application/o/golf-gaggle/end-session/", "https://pisky.id");
 
-    // Add parameters if provided
     if (session) {
       endSessionUrl.searchParams.set("id_token_hint", session.id_token);
     }
-    endSessionUrl.searchParams.set("redirect", "http://localhost:4000/logout/callback");
-    // await fetch(endSessionUrl.toString(), {
-    //   method: "GET", // Explicitly set the method to GET
-    //   headers: {
-    //     Accept: "application/json", //  Let authentik know we can accept JSON (optional, but good practice)
-    //   },
-    // }).then(async (req) => {
-    //   debugger;
-    //   await signOut({ redirect: true });
-    // });
-    await signOut();
     window.location.href = endSessionUrl.toString();
   };
 
@@ -141,35 +125,15 @@ const ResponsiveAppBar = () => {
               onClose={handleCloseNavMenu}
               sx={{ display: { xs: "block", md: "none" } }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography sx={{ textAlign: "center" }}>{page}</Typography>
+              {navItems.map((page) => (
+                <MenuItem key={page.title} onClick={handleCloseNavMenu}>
+                  <Link href={page.href}>
+                    <Typography sx={{ textAlign: "center" }}>{page.title}</Typography>
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          {/* <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} /> */}
-          {/* <Icon sx={{ fontSize: 75 }}>
-            <Image src={"/gaggle-icons/GaggleLogo.png"} height={75} width={75} alt="haha" />
-          </Icon> */}
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              //fontFamily: "monospace",
-              fontWeight: 700,
-              //letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            Golf Gaggle
-          </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {navItems.map((page) => (
               <Button key={page.title} href={page.href} sx={{ my: 2, color: "white", display: "block" }}>
@@ -179,9 +143,13 @@ const ResponsiveAppBar = () => {
           </Box>
           <Box sx={{ flexGrow: 0 }}>
             {session ? (
-              <Button variant="outlined" sx={{ color: "black", borderColor: "black" }} onClick={handleLogout}>
-                Logout
-              </Button>
+              <>
+                <IconButton onClick={handleOpenUserMenu}>
+                  <Icon sx={{ fontSize: 75 }}>
+                    <Image src={"/gaggle-icons/GaggleLogo.png"} height={75} width={75} alt="haha" />
+                  </Icon>
+                </IconButton>
+              </>
             ) : (
               <Button
                 variant="outlined"
@@ -191,13 +159,6 @@ const ResponsiveAppBar = () => {
                 Login
               </Button>
             )}
-
-            {/* <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-              
-            </Tooltip> */}
             <Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"
@@ -214,11 +175,17 @@ const ResponsiveAppBar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography sx={{ textAlign: "center" }}>{setting}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Link href={"/profile"}>
+                  <Typography sx={{ textAlign: "center" }}>profile</Typography>
+                </Link>
+              </MenuItem>
+              <MenuItem onClick={() => handleLogout(false)}>
+                <Typography sx={{ textAlign: "center" }}>logout</Typography>
+              </MenuItem>
+              <MenuItem onClick={() => handleLogout(true)}>
+                <Typography sx={{ textAlign: "center" }}>not you?</Typography>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
