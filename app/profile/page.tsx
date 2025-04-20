@@ -1,6 +1,5 @@
 import { getServerSession } from "next-auth/next";
 import { useSession } from "next-auth/react";
-import { authConfig } from "../auth";
 
 export default function Page() {
   const { data: session } = useSession();
