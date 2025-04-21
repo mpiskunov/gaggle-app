@@ -43,6 +43,10 @@ const navItems = [
     title: "contact",
     href: "/contact",
   },
+  {
+    title: "user",
+    href: "/user",
+  },
 ];
 
 const ResponsiveAppBar = () => {
@@ -80,7 +84,7 @@ const ResponsiveAppBar = () => {
   };
 
   const handleLogout = async (federated: boolean) => {
-    await signOut({ redirect: !federated });
+    await signOut({ redirect: !federated, callbackUrl: "/" });
     if (!federated) return;
     const session = await getSession();
     const endSessionUrl = new URL("/application/o/golf-gaggle/end-session/", "https://pisky.id");
@@ -99,14 +103,7 @@ const ResponsiveAppBar = () => {
             <Image src={"/gaggle-icons/GaggleLogo.png"} height={75} width={75} alt="haha" />
           </Icon>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
+            <IconButton size="large" aria-label="account of current user" aria-controls="menu-appbar" aria-haspopup="true" onClick={handleOpenNavMenu} color="inherit">
               <MenuIcon />
             </IconButton>
             <Menu
@@ -151,11 +148,7 @@ const ResponsiveAppBar = () => {
                 </IconButton>
               </>
             ) : (
-              <Button
-                variant="outlined"
-                sx={{ color: "black", borderColor: "black" }}
-                onClick={() => signIn("authentik", { redirect: true, callbackUrl: "/" })}
-              >
+              <Button variant="outlined" sx={{ color: "black", borderColor: "black" }} onClick={() => signIn("authentik", { redirect: true, callbackUrl: "/" })}>
                 Login
               </Button>
             )}
