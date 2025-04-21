@@ -1,6 +1,6 @@
 import { BaseEntity, UUID } from "./BaseEntity";
 
-class TournamentCourseRound extends BaseEntity {
+export class TournamentCourseRound extends BaseEntity {
   constructor(
     createdBy: string,
     createdDate: Date,

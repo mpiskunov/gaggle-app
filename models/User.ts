@@ -1,7 +1,7 @@
 import { BaseEntity, UUID } from "./BaseEntity";
 import * as EmailValidator from "email-validator";
 
-class GaggleUser extends BaseEntity {
+export class GaggleUser extends BaseEntity {
   constructor(createdBy: string, createdDate: Date, firstName: string, lastName: string, username: string, email: string, externalUserId: string) {
     super(createdBy, createdDate);
     if (!EmailValidator.validate(email)) {

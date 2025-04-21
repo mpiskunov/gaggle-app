@@ -1,5 +1,5 @@
 import { auth } from "@/auth";
-import { query } from "@/db/db";
+import { query } from "@/db";
 
 export default async function Page() {
   const session = await auth();

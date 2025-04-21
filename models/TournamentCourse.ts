@@ -1,6 +1,6 @@
 import { BaseEntity, UUID } from "./BaseEntity";
 
-class TournamentCourse extends BaseEntity {
+export class TournamentCourse extends BaseEntity {
   constructor(createdBy: string, createdDate: Date, tournamentId: UUID, courseId: UUID, winnerId: UUID) {
     super(createdBy, createdDate);
     this.tournamentId = tournamentId;

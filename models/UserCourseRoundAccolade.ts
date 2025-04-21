@@ -1,7 +1,15 @@
 import { BaseEntity, UUID } from "./BaseEntity";
 
-class UserCourseRoundAccolade extends BaseEntity {
-  constructor(createdBy: string, createdDate: Date, userId: UUID, tournamentCourseRoundId: UUID, accoladeId: UUID, count: number, isPublished: boolean) {
+export class UserCourseRoundAccolade extends BaseEntity {
+  constructor(
+    createdBy: string,
+    createdDate: Date,
+    userId: UUID,
+    tournamentCourseRoundId: UUID,
+    accoladeId: UUID,
+    count: number,
+    isPublished: boolean
+  ) {
     super(createdBy, createdDate);
     this.userId = userId;
     this.tournamentCourseRoundId = tournamentCourseRoundId;

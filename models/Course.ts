@@ -1,6 +1,6 @@
 import { BaseEntity } from "./BaseEntity";
 
-class Course extends BaseEntity {
+export class Course extends BaseEntity {
   constructor(createdBy: string, createdDate: Date, name: string, description: string, address: string) {
     super(createdBy, createdDate);
     this.name = name;
