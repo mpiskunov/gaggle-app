@@ -10,6 +10,7 @@ import Head from "next/head";
 import theme from "@/theme";
 import HeaderSection from "@/components/header/header";
 import ResponsiveAppBar from "@/components/header2/Header2";
+import { SessionProvider } from "next-auth/react";
 config.autoAddCss = false;
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -28,20 +29,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Metamorphous&display=swap" rel="stylesheet" />
-        <script src="https://kit.fontawesome.com/gaggleapp.js" crossOrigin="anonymous" async></script>
-      </Head>
-      <AppRouterCacheProvider>
-        <ThemeProvider theme={theme}>
-          <body className={cn("font-sans antialiased bg-slate-200", fontSans.variable)}>
-            <ResponsiveAppBar />
-            {children}
-          </body>
-        </ThemeProvider>
-      </AppRouterCacheProvider>
+      <SessionProvider>
+        <Head>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+          <link href="https://fonts.googleapis.com/css2?family=Metamorphous&display=swap" rel="stylesheet" />
+          <script src="https://kit.fontawesome.com/gaggleapp.js" crossOrigin="anonymous" async></script>
+        </Head>
+        <AppRouterCacheProvider>
+          <ThemeProvider theme={theme}>
+            <body className={cn("font-sans antialiased bg-slate-200", fontSans.variable)}>
+              <ResponsiveAppBar />
+              {children}
+            </body>
+          </ThemeProvider>
+        </AppRouterCacheProvider>
+      </SessionProvider>
     </html>
   );
 }

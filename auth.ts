@@ -1,6 +1,12 @@
 import Authentik from "next-auth/providers/authentik";
 import NextAuth from "next-auth";
+import type { Provider } from "next-auth/providers";
 
+const providers: Provider[] = [
+  Authentik({
+    authorization: { params: { scope: "openid email profile offline_access" } },
+  }),
+];
 export const { auth, handlers, signIn, signOut } = NextAuth({
   callbacks: {
     async jwt({ token, account, profile }) {
@@ -16,9 +22,18 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       return session;
     },
   },
-  providers: [
-    Authentik({
-      authorization: { params: { scope: "openid email profile offline_access" } },
-    }),
-  ],
+  providers: providers,
+  // pages: {
+  //   signIn: "/signin2",
+  // },
 });
+export const providerMap = providers
+  .map((provider) => {
+    if (typeof provider === "function") {
+      const providerData = provider();
+      return { id: providerData.id, name: providerData.name };
+    } else {
+      return { id: provider.id, name: provider.name };
+    }
+  })
+  .filter((provider) => provider.id !== "credentials");
