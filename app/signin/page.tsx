@@ -1,20 +1,22 @@
 "use client";
 import { useSession, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-//import { useSession } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
 export default function Page() {
   const router = useRouter();
   const { status } = useSession();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     if (status === "unauthenticated") {
-      signIn("authentik");
+      const callbackUrl = searchParams.get("callbackUrl");
+      signIn("authentik", { redirect: true, redirectTo: callbackUrl ?? "/" });
     } else if (status === "authenticated") {
       router.push("/");
     }
-  }, [router, status]);
+  }, [router, searchParams, status]);
 
   return <div></div>;
 }

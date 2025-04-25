@@ -1,3 +1,4 @@
+import { randomUUID } from "crypto";
 import { Pool } from "pg";
 
 const connectionPool = new Pool({
@@ -18,7 +19,7 @@ const connect = async () => {
   }
 };
 
-const query = async (text: string, params: any[]) => {
+const query = async (text: string, params?: any[]) => {
   const client = await connect();
   try {
     const result = await client.query(text, params);
@@ -26,6 +27,22 @@ const query = async (text: string, params: any[]) => {
   } catch (error) {
     console.error("Error executing query:", error);
     throw error;
+  } finally {
+    client.release();
+  }
+};
+
+const execute = async (text: string, params?: any[]) => {
+  const client = await connectionPool.connect();
+
+  try {
+    await client.query("BEGIN");
+    const result = await client.query(text, params);
+    await client.query("COMMIT");
+    return result;
+  } catch (e) {
+    await client.query("ROLLBACK");
+    throw e;
   } finally {
     client.release();
   }
@@ -51,4 +68,4 @@ const transaction = async (text: string, params: any[]) => {
   }
 };
 
-export { connect, query };
+export { connect, query, execute };

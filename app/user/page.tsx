@@ -1,15 +1,9 @@
 import { auth, signIn } from "@/auth";
-import { query } from "@/db";
-import { headers } from "next/headers";
-import { redirect } from "next/navigation";
-
+//import { CreateUser } from "@/db/users/commands";
 export default async function Page() {
   const session = await auth();
-  const headersList = await headers();
-  if (!session) void redirect("/signin");
-
-  const result = await query("SELECT * FROM gaggle_users LIMIT 5", []);
-  console.log(result.rows);
-
+  if (!session) return <></>;
+  //var result = await CreateUser("Papa", "John", "m@mag.com", "lskjflj");
+  // console.log(result);
   return <pre>{JSON.stringify(session, null, 2)}</pre>;
 }
