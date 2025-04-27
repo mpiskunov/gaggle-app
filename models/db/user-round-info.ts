@@ -1,4 +1,4 @@
-import { BaseEntity, UUID } from "./BaseEntity";
+import { BaseEntity, UUID } from "./base-entity";
 
 export class UserRoundInfo extends BaseEntity {
   constructor(createdBy: string, createdDate: Date, userId: UUID, tournamentCourseRoundId: UUID, grossStrokes: number, isPublished: boolean) {

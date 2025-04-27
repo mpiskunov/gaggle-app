@@ -1,4 +1,4 @@
-import { BaseEntity, UUID } from "./BaseEntity";
+import { BaseEntity, UUID } from "./base-entity";
 
 export class UserCourseRoundAccolade extends BaseEntity {
   constructor(

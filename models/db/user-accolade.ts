@@ -1,4 +1,4 @@
-import { BaseEntity, UUID } from "./BaseEntity";
+import { BaseEntity, UUID } from "./base-entity";
 
 // this class will be used to track things like last year's winner, special user emblems, etc.
 export class UserCourseAccolade extends BaseEntity {

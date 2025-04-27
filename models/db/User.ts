@@ -1,4 +1,4 @@
-import { BaseEntity } from "./BaseEntity";
+import { BaseEntity } from "./base-entity";
 import * as EmailValidator from "email-validator";
 
 export class GaggleUser extends BaseEntity {

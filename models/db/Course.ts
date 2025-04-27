@@ -1,4 +1,4 @@
-import { BaseEntity } from "./BaseEntity";
+import { BaseEntity } from "./base-entity";
 
 export class Course extends BaseEntity {
   constructor(createdBy: string, createdDate: Date, name: string, description: string, address: string) {
