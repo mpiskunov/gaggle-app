@@ -47,7 +47,7 @@ const ResponsiveAppBar = () => {
     const fetchData = async () => {
       try {
         const session = await getSession();
-        console.log(session);
+        //console.log(session);
         setSession(session);
       } catch (error) {
         console.error("Error fetching data:", error);

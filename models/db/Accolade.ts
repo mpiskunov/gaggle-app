@@ -1,7 +1,7 @@
 import { BaseEntity } from "./base-entity";
 
 export class Accolade extends BaseEntity {
-  constructor(createdBy: string, createdDate: Date, name: string, description: string, value: number) {
+  constructor(createdBy: string, createdDate: Date, name: string, description: string, value: string) {
     super(createdBy, createdDate);
     this.name = name;
     this.description = description;
@@ -9,5 +9,5 @@ export class Accolade extends BaseEntity {
   }
   name: string;
   description: string;
-  value: number;
+  value: string;
 }
