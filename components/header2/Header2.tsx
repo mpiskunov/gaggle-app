@@ -8,10 +8,7 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import { Icon, Button } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
@@ -19,12 +16,7 @@ import { signIn, signOut } from "next-auth/react";
 import { Session } from "next-auth";
 import { getSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-const pages = ["Home", "Gagglery", "About", "Rules"];
-const settings = [
-  { title: "profile", href: "/profile" },
-  { title: "logout", href: "/api/logout" },
-  { title: "not you?", href: "/logout-federated" },
-];
+
 const navItems = [
   {
     title: "home",
@@ -64,7 +56,6 @@ const ResponsiveAppBar = () => {
 
     fetchData();
   }, []);
-
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -86,7 +77,6 @@ const ResponsiveAppBar = () => {
   const handleLogout = async (federated: boolean) => {
     await signOut({ redirect: !federated, callbackUrl: "/" });
     if (!federated) return;
-    const session = await getSession();
     const endSessionUrl = new URL("/application/o/golf-gaggle/end-session/", "https://pisky.id");
 
     if (session) {
@@ -129,6 +119,13 @@ const ResponsiveAppBar = () => {
                   </Link>
                 </MenuItem>
               ))}
+              {session && session.groups.includes("gaggle_admin") && (
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Link href={`/commissioner`}>
+                    <Typography sx={{ textAlign: "center" }}>commissioner</Typography>
+                  </Link>
+                </MenuItem>
+              )}
             </Menu>
           </Box>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
@@ -136,7 +133,12 @@ const ResponsiveAppBar = () => {
               <Button key={page.title} href={page.href} sx={{ my: 2, color: "white", display: "block" }}>
                 {page.title}
               </Button>
-            ))}
+            ))}{" "}
+            {session && session.groups.includes("gaggle_admin") && (
+              <Button href={`/commissioner`} sx={{ my: 2, color: "white", display: "block" }}>
+                commissioner
+              </Button>
+            )}
           </Box>
           <Box sx={{ flexGrow: 0 }}>
             {session ? (
