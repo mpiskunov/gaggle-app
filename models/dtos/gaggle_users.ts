@@ -5,6 +5,7 @@ export interface GaggleUserDTO {
   firstName: string;
   lastName: string;
   email: string;
+  isDeleted: boolean;
 }
 
 export interface CreateUserDTO {
@@ -12,4 +13,5 @@ export interface CreateUserDTO {
   lastName: string;
   email: string;
   externalUserlId: string;
+  createdBy: UUID;
 }

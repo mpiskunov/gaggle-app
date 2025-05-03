@@ -1,44 +1,46 @@
-import { GaggleUserDTO } from "@/models/dtos/user";
+import { GetTournamentByIdDTO, TournamentDTO } from "@/models/dtos/tournaments";
 import { query } from "..";
+import { UUID } from "@/models/db/base-entity";
 
-const GetUserByExternalId = async (externalUserId: string): Promise<GaggleUserDTO | null> => {
-  console.log(externalUserId);
+const GetTournamentById = async (tournamentId: UUID): Promise<GetTournamentByIdDTO | null> => {
   const result = await query(
     `
         SELECT * 
-        FROM gaggle_users 
-        WHERE external_user_id = '${externalUserId}'
+        FROM tournaments 
+        WHERE id = '${tournamentId}'
     `
   );
   if (result.rowCount == 0) return null;
-  const user: GaggleUserDTO = {
+  const Tournament: TournamentDTO = {
     id: result.rows[0]["id"],
-    firstName: result.rows[0]["first_name"],
-    lastName: result.rows[0]["last_name"],
-    email: result.rows[0]["email"],
+    name: result.rows[0]["name"],
+    year: result.rows[0]["year"],
+    description: result.rows[0]["description"],
+    winnerId: result.rows[0]["winner_id"],
+    isDeleted: result.rows[0]["isDeleted"],
   };
-  return user;
+  return Tournament;
 };
 
-const GetAllUsers = async ({ includeDeleted = false } = {}): Promise<GaggleUserDTO[] | []> => {
-  const result = await query(
-    `
+const GetAllTournaments = async ({ includeDeleted = false } = {}): Promise<TournamentDTO[] | []> => {
+  let queryString = ` 
         SELECT * 
-        FROM gaggle_users 
-        WHERE is_deleted = '${includeDeleted}'
-    `
-  );
+        FROM tournaments `;
+  if (!includeDeleted) queryString += "WHERE is_deleted = true";
+  const result = await query(queryString);
   if (result.rowCount == 0) return [];
 
-  const userList: GaggleUserDTO[] = result.rows.map((user) => {
+  const TournamentList: TournamentDTO[] = result.rows.map((tournament) => {
     return {
-      id: user["id"],
-      firstName: user["first_name"],
-      lastName: user["last_name"],
-      email: user["email"],
+      id: tournament["id"],
+      name: tournament["name"],
+      year: tournament["year"],
+      description: tournament["description"],
+      winnerId: tournament["winner_id"],
+      isDeleted: tournament["is_deleted"],
     };
   });
-  return userList;
+  return TournamentList;
 };
 
-export { GetUserByExternalId, GetAllUsers };
+export { GetTournamentById, GetAllTournaments };

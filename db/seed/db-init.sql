@@ -16,6 +16,27 @@ CREATE DATABASE gaggle_test
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
+----------------------------------------------- GENERATE TIMESTAMP FOR updated_date ON UPDATE -----------------------------------------------
+
+-- FUNCTION: public.trigger_set_timestamp()
+
+-- DROP FUNCTION IF EXISTS public.trigger_set_timestamp();
+
+CREATE OR REPLACE FUNCTION public.trigger_set_timestamp()
+    RETURNS trigger
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE NOT LEAKPROOF
+AS $BODY$
+BEGIN
+  NEW.updated_date = (now() AT TIME ZONE 'utc'::text);
+  RETURN NEW;
+END;
+$BODY$;
+
+ALTER FUNCTION public.trigger_set_timestamp()
+    OWNER TO postgres;
+
 -----------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------
 
@@ -673,3 +694,63 @@ CREATE INDEX IF NOT EXISTS fki_fk_tournament_course_round_course_round_accolades
 
 -----------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE TRIGGER set_update_timestamp_trigger_accolades
+    BEFORE UPDATE 
+    ON public.accolades
+    FOR EACH ROW
+    EXECUTE FUNCTION public.trigger_set_timestamp();
+
+CREATE OR REPLACE TRIGGER set_update_timestamp_trigger_courses
+    BEFORE UPDATE 
+    ON public.courses
+    FOR EACH ROW
+    EXECUTE FUNCTION public.trigger_set_timestamp();
+
+CREATE OR REPLACE TRIGGER set_update_timestamp_trigger_gaggle_users
+    BEFORE UPDATE 
+    ON public.gaggle_users
+    FOR EACH ROW
+    EXECUTE FUNCTION public.trigger_set_timestamp();
+
+CREATE OR REPLACE TRIGGER set_update_timestamp_trigger_tournament_course_rounds
+    BEFORE UPDATE 
+    ON public.tournament_course_rounds
+    FOR EACH ROW
+    EXECUTE FUNCTION public.trigger_set_timestamp();
+
+CREATE OR REPLACE TRIGGER set_update_timestamp_trigger_tournament_courses
+    BEFORE UPDATE 
+    ON public.tournament_courses
+    FOR EACH ROW
+    EXECUTE FUNCTION public.trigger_set_timestamp();
+
+CREATE OR REPLACE TRIGGER set_update_timestamp_trigger_tournaments
+    BEFORE UPDATE 
+    ON public.tournaments
+    FOR EACH ROW
+    EXECUTE FUNCTION public.trigger_set_timestamp();
+
+CREATE OR REPLACE TRIGGER set_update_timestamp_trigger_user_accolades
+    BEFORE UPDATE 
+    ON public.user_accolades
+    FOR EACH ROW
+    EXECUTE FUNCTION public.trigger_set_timestamp();
+
+CREATE OR REPLACE TRIGGER set_update_timestamp_trigger_user_course_infos
+    BEFORE UPDATE 
+    ON public.user_course_infos
+    FOR EACH ROW
+    EXECUTE FUNCTION public.trigger_set_timestamp();
+
+CREATE OR REPLACE TRIGGER set_update_timestamp_trigger_user_course_round_accolades
+    BEFORE UPDATE 
+    ON public.user_course_round_accolades
+    FOR EACH ROW
+    EXECUTE FUNCTION public.trigger_set_timestamp();
+
+CREATE OR REPLACE TRIGGER set_update_timestamp_user_round_infos
+    BEFORE UPDATE 
+    ON public.user_round_infos
+    FOR EACH ROW
+    EXECUTE FUNCTION public.trigger_set_timestamp();

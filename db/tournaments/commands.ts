@@ -1,14 +1,14 @@
-import { CreateUserDTO } from "@/models/dtos/user";
+import { CreateTournamentDTO } from "@/models/dtos/tournaments";
 import { execute } from "..";
 
-const CreateUser = async (userDto: CreateUserDTO) => {
+const CreateTournament = async (tournamentDTO: CreateTournamentDTO) => {
   const queryText = `
-    INSERT INTO gaggle_users(first_name, last_name, email, external_user_id, created_by) 
-    VALUES($1, $2, $3, $4, $5) RETURNING id
+    INSERT INTO tournaments(name, year, description, created_by) 
+    VALUES($1, $2, $3, $4) RETURNING id
   `;
-  const params: any[] = [userDto.firstName, userDto.lastName, userDto.email, userDto.externalUserlId, process.env.SYSTEM_GUID];
+  const params: any[] = [tournamentDTO.name, tournamentDTO.year, tournamentDTO.description, process.env.SYSTEM_GUID];
   const result = await execute(queryText, params);
   return result.rows;
 };
 
-export { CreateUser };
+export { CreateTournament };

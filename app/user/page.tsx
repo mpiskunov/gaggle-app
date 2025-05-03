@@ -1,18 +1,14 @@
 import { auth } from "@/auth";
-import { CreateUserDTO } from "@/models/dtos/user";
-import { headers } from "next/headers";
-import { CreateUser } from "@/db/users/commands";
+import { CreateAccolade, UpdateAccolade } from "@/db/accolades/commands";
 export default async function Page() {
   const session = await auth();
   if (!session) return <></>;
-  //console.log(session);
-  // const userDto: CreateUserDTO = {
-  //   firstName: "Jacob",
-  //   lastName: "Eknaian",
-  //   email: "jake@golfgaggle.com",
-  //   externalId: "lkjasdfoirgsoij09gjgr",
-  // };
-  // var result = await CreateUser(userDto.firstName, userDto.lastName, userDto.email, userDto.externalId);
-  // console.log(result);
+
+  var result = await UpdateAccolade({
+    id: "774a3a7c-2db9-4285-af94-0573ceaa24f8",
+    name: "cool ffffff here",
+    updatedBy: "40b50928-cefd-41ae-816b-b6b1173456b1",
+  });
+  console.log("result", result);
   return <pre>{JSON.stringify(session, null, 2)}</pre>;
 }

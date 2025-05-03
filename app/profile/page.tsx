@@ -1,9 +1,8 @@
-import { getServerSession } from "next-auth/next";
-import { useSession } from "next-auth/react";
+import { auth } from "@/auth";
+import { CreateAccolade } from "@/db/accolades/commands";
 
-export default function Page() {
-  const { data: session } = useSession();
-
+export default async function Page() {
+  const session = await auth();
   if (typeof window === "undefined") return null;
 
   if (session) {

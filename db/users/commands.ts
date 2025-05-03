@@ -1,4 +1,4 @@
-import { CreateUserDTO } from "@/models/dtos/user";
+import { CreateUserDTO } from "@/models/dtos/gaggle_users";
 import { execute } from "..";
 
 const CreateUser = async (userDto: CreateUserDTO) => {
