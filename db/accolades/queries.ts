@@ -1,46 +1,60 @@
-import { GaggleUserDTO } from "@/models/dtos/gaggle_users";
+import { AccoladeDTO } from "@/models/dtos/accolades";
 import { query } from "..";
+import { UUID } from "@/models/db/base-entity";
 
-const GetUserByExternalId = async (externalUserId: string): Promise<GaggleUserDTO | null> => {
-  console.log(externalUserId);
-  const result = await query(
-    `
-        SELECT * 
-        FROM gaggle_users 
-        WHERE external_user_id = '${externalUserId}'
-    `
-  );
-  if (result.rowCount == 0) return null;
-  const user: GaggleUserDTO = {
-    id: result.rows[0]["id"],
-    firstName: result.rows[0]["first_name"],
-    lastName: result.rows[0]["last_name"],
-    email: result.rows[0]["email"],
-    isDeleted: result.rows[0]["is_deleted"],
-  };
-  return user;
-};
+const GetAccoladeById = async (id: UUID): Promise<AccoladeDTO | null> => {
+  try {
+    const params: any[] = [id];
+    const text = `
+      SELECT * 
+      FROM public.accolades
+      WHERE id = $1
+    `;
 
-const GetAllUsers = async ({ includeDeleted = false } = {}): Promise<GaggleUserDTO[] | []> => {
-  const result = await query(
-    `
-        SELECT * 
-        FROM gaggle_users 
-        WHERE is_deleted = '${includeDeleted}'
-    `
-  );
-  if (result.rowCount == 0) return [];
-
-  const accList: GaggleUserDTO[] = result.rows.map((acc) => {
-    return {
-      id: acc["id"],
-      firstName: acc["first_name"],
-      lastName: acc["last_name"],
-      email: acc["email"],
-      isDeleted: acc["is_deleted"],
+    const result = await query(text, params);
+    if (result.rowCount === 0) return null;
+    const item = result.rows[0];
+    const accolade: AccoladeDTO = {
+      id: item["id"],
+      name: item["name"],
+      description: item["description"],
+      value: item["value"],
+      isDeleted: item["is_deleted"],
     };
-  });
-  return accList;
+    return accolade;
+  } catch (error: any) {
+    console.error(`Error getting Accolade: ${id}`, error);
+    return null;
+  }
 };
 
-export { GetUserByExternalId, GetAllUsers };
+const GetAllAccolades = async ({ includeDeleted = false } = {}): Promise<AccoladeDTO[] | []> => {
+  try {
+    const params: any[] = [includeDeleted];
+    const text = `
+    SELECT * 
+    FROM public.accolades
+    WHERE is_deleted = FALSE 
+    OR (is_deleted = TRUE AND $1 = TRUE);
+  `;
+    const result = await query(text, params);
+
+    if (result.rowCount == 0) return [];
+
+    const list: AccoladeDTO[] = result.rows.map((item) => {
+      return {
+        id: item["id"],
+        name: item["name"],
+        description: item["description"],
+        value: item["value"],
+        isDeleted: item["is_deleted"],
+      };
+    });
+    return list;
+  } catch (error: any) {
+    console.error(`Error getting all Accolades.`, error);
+    return [];
+  }
+};
+
+export { GetAccoladeById, GetAllAccolades };

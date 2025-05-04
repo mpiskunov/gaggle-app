@@ -3,21 +3,25 @@ import { execute } from "..";
 import { UUID } from "@/models/db/base-entity";
 
 const CreateAccolade = async (accDto: CreateAccoladeDTO): Promise<UUID | null> => {
-  const queryText = `
+  try {
+    const queryText = `
     INSERT INTO accolades(name, description, value, created_by) 
     VALUES($1, $2, $3, $4) RETURNING id
   `;
-  const params: any[] = [accDto.name, accDto.description, accDto.value, accDto.createdBy ?? process.env.SYSTEM_GUID];
-  const result = await execute(queryText, params);
-  return result.rows.length > 0 ? result.rows[0]["id"] : null;
+    const params: any[] = [accDto.name, accDto.description, accDto.value, accDto.createdBy];
+    const result = await execute(queryText, params);
+    return result.rows.length > 0 ? result.rows[0]["id"] : null;
+  } catch (error: any) {
+    console.error("Error creating accolade.", error);
+    return null;
+  }
 };
 
 const UpdateAccolade = async (dto: UpdateAccoladeByIdDTO): Promise<number> => {
   try {
     const updates: string[] = [];
-    const params: any[] = [dto.id]; //  id is always the first parameter
+    const params: any[] = [dto.id];
     let paramIndex = 2;
-
     const fields = [
       { name: "name", value: dto.name },
       { name: "description", value: dto.description },
@@ -46,7 +50,7 @@ const UpdateAccolade = async (dto: UpdateAccoladeByIdDTO): Promise<number> => {
     const result = await execute(query, params);
     return result.rowCount ?? 0;
   } catch (error: any) {
-    console.error("Error updating accolade:", error);
+    console.error("Error updating accolade.", error);
     return -1;
   }
 };

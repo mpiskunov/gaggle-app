@@ -4,7 +4,7 @@ export interface CreateAccoladeDTO {
   name: string;
   description: string;
   value: string;
-  createdBy?: UUID;
+  createdBy: UUID;
 }
 
 export interface GetAccoladeByIdDTO {

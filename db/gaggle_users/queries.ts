@@ -2,7 +2,6 @@ import { GaggleUserDTO } from "@/models/dtos/gaggle_users";
 import { query } from "..";
 
 const GetUserByExternalId = async (externalUserId: string): Promise<GaggleUserDTO | null> => {
-  console.log(externalUserId);
   const result = await query(
     `
         SELECT * 
@@ -21,7 +20,7 @@ const GetUserByExternalId = async (externalUserId: string): Promise<GaggleUserDT
   return user;
 };
 
-const GetAllUsers = async ({ includeDeleted = false } = {}): Promise<GaggleUserDTO[] | []> => {
+const GetAllUsers = async ({ includeDeleted = false } = {}): Promise<GaggleUserDTO[]> => {
   const result = await query(
     `
         SELECT * 

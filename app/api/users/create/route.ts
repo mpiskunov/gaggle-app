@@ -1,5 +1,5 @@
 import { auth } from "@/auth";
-import { CreateUser } from "@/db/users/commands";
+import { CreateUser } from "@/db/gaggle_users/commands";
 import { CreateUserDTO } from "@/models/dtos/gaggle_users";
 import { NextResponse } from "next/server";
 // export const POST = auth(async function POST(req) {

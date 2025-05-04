@@ -1,46 +1,60 @@
-import { GaggleUserDTO } from "@/models/dtos/gaggle_users";
+import { CourseDTO } from "@/models/dtos/courses";
 import { query } from "..";
+import { UUID } from "@/models/db/base-entity";
 
-const GetUserByExternalId = async (externalUserId: string): Promise<GaggleUserDTO | null> => {
-  console.log(externalUserId);
-  const result = await query(
-    `
-        SELECT * 
-        FROM gaggle_users 
-        WHERE external_user_id = '${externalUserId}'
-    `
-  );
-  if (result.rowCount == 0) return null;
-  const user: GaggleUserDTO = {
-    id: result.rows[0]["id"],
-    firstName: result.rows[0]["first_name"],
-    lastName: result.rows[0]["last_name"],
-    email: result.rows[0]["email"],
-    isDeleted: result.rows[0]["is_deleted"],
-  };
-  return user;
-};
+const GetCourseById = async (id: UUID): Promise<CourseDTO | null> => {
+  try {
+    const params: any[] = [id];
+    const text = `
+      SELECT * 
+      FROM public.courses
+      WHERE id = $1
+    `;
 
-const GetAllUsers = async ({ includeDeleted = false } = {}): Promise<GaggleUserDTO[] | []> => {
-  const result = await query(
-    `
-        SELECT * 
-        FROM gaggle_users 
-        WHERE is_deleted = '${includeDeleted}'
-    `
-  );
-  if (result.rowCount == 0) return [];
-
-  const userList: GaggleUserDTO[] = result.rows.map((user) => {
-    return {
-      id: user["id"],
-      firstName: user["first_name"],
-      lastName: user["last_name"],
-      email: user["email"],
-      isDeleted: user["is_deleted"],
+    const result = await query(text, params);
+    if (result.rowCount === 0) return null;
+    const item = result.rows[0];
+    const accolade: CourseDTO = {
+      id: item["id"],
+      name: item["name"],
+      description: item["description"],
+      address: item["address"],
+      isDeleted: item["is_deleted"],
     };
-  });
-  return userList;
+    return accolade;
+  } catch (error: any) {
+    console.error(`Error getting Course: ${id}`, error);
+    return null;
+  }
 };
 
-export { GetUserByExternalId, GetAllUsers };
+const GetAllCourses = async ({ includeDeleted = false } = {}): Promise<CourseDTO[] | []> => {
+  try {
+    const params: any[] = [includeDeleted];
+    const text = `
+    SELECT * 
+    FROM public.courses
+    WHERE is_deleted = FALSE 
+    OR (is_deleted = TRUE AND $1 = TRUE);
+  `;
+    const result = await query(text, params);
+
+    if (result.rowCount == 0) return [];
+
+    const list: CourseDTO[] = result.rows.map((item) => {
+      return {
+        id: item["id"],
+        name: item["name"],
+        description: item["description"],
+        address: item["address"],
+        isDeleted: item["is_deleted"],
+      };
+    });
+    return list;
+  } catch (error: any) {
+    console.error(`Error getting all Courses.`, error);
+    return [];
+  }
+};
+
+export { GetCourseById, GetAllCourses };

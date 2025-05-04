@@ -1,6 +1,6 @@
 import { UUID } from "../db/base-entity";
 
-export interface CreateTournamentDTO {
+export interface CreateTournamentCourseRoundDTO {
   courseId: UUID;
   tournamentCourseId: UUID;
   courseRoundNumber: number;
@@ -12,11 +12,11 @@ export interface CreateTournamentDTO {
   createdBy: UUID;
 }
 
-export interface GetTournamentByIdDTO {
+export interface GetTournamentCourseRoundByIdDTO {
   id: UUID;
 }
 
-export interface UpdateTournamentByIdDTO {
+export interface UpdateTournamentCourseRoundByIdDTO {
   id: UUID;
   courseId?: UUID;
   tournamentCourseId?: UUID;
@@ -30,7 +30,7 @@ export interface UpdateTournamentByIdDTO {
   updatedBy: UUID;
 }
 
-export interface TournamentDTO {
+export interface TournamentCourseRoundDTO {
   id: UUID;
   courseId: UUID;
   tournamentCourseId: UUID;

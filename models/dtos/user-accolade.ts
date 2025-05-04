@@ -1,16 +1,16 @@
 import { UUID } from "../db/base-entity";
 
-export interface CreateUserRoundInfoDTO {
+export interface CreateUserAccoladeInfoDTO {
   userId: UUID;
   accoladeID: UUID;
   createdBy: UUID;
 }
 
-export interface GetUserRoundInfoByIdDTO {
+export interface GetUserAccoladeInfoByIdDTO {
   id: UUID;
 }
 
-export interface UpdateUserRoundInfoByIdDTO {
+export interface UpdateUserAccoladeInfoByIdDTO {
   id: UUID;
   userId?: UUID;
   accoladeID?: UUID;
@@ -18,7 +18,7 @@ export interface UpdateUserRoundInfoByIdDTO {
   updatedBy: UUID;
 }
 
-export interface UserRoundInfoDTO {
+export interface UserAccoladeInfoDTO {
   id: UUID;
   userId: UUID;
   accoladeID: UUID;
