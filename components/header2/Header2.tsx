@@ -39,9 +39,13 @@ const navItems = [
     title: "user",
     href: "/user",
   },
+  {
+    title: "secret",
+    href: "/secret",
+  },
 ];
 
-const ResponsiveAppBar = () => {
+const GaggleHeader = () => {
   const [session, setSession] = useState<Session | null>(null);
   useEffect(() => {
     const fetchData = async () => {
@@ -188,4 +192,4 @@ const ResponsiveAppBar = () => {
     </AppBar>
   );
 };
-export default ResponsiveAppBar;
+export default GaggleHeader;
