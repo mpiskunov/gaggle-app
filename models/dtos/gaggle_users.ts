@@ -27,5 +27,6 @@ export interface GaggleUserDTO {
   firstName: string;
   lastName: string;
   email: string;
+  externalUserlId: string;
   isDeleted: boolean;
 }

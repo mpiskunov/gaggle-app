@@ -19,6 +19,7 @@ const GetUserByExternalId = async (externalUserId: string): Promise<GaggleUserDT
     lastName: item["last_name"],
     email: item["email"],
     isDeleted: item["is_deleted"],
+    externalUserlId: item["external_user_id"],
   };
   return user;
 };
@@ -41,6 +42,7 @@ const GetGaggleUserById = async (id: UUID): Promise<GaggleUserDTO | null> => {
       lastName: item["last_name"],
       email: item["email"],
       isDeleted: item["is_deleted"],
+      externalUserlId: item["external_user_id"],
     };
     return dto;
   } catch (error: any) {
@@ -69,6 +71,7 @@ const GetAllGaggleUsers = async ({ includeDeleted = false } = {}): Promise<Gaggl
         lastName: item["last_name"],
         email: item["email"],
         isDeleted: item["is_deleted"],
+        externalUserlId: item["external_user_id"],
       };
     });
     return list;
