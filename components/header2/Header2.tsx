@@ -43,6 +43,10 @@ const navItems = [
     title: "secret",
     href: "/secret",
   },
+  {
+    title: "accolades",
+    href: "/accolades",
+  },
 ];
 
 const GaggleHeader = () => {
@@ -149,7 +153,7 @@ const GaggleHeader = () => {
               <>
                 <IconButton onClick={handleOpenUserMenu}>
                   <Icon sx={{ fontSize: 75 }}>
-                    <Image src={"/gaggle-icons/GaggleLogo.png"} height={75} width={75} alt="haha" />
+                    <Image src={`${session.user?.image}`} height={75} width={75} alt="haha" style={{ borderRadius: "50%" }} />
                   </Icon>
                 </IconButton>
               </>
