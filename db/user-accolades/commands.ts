@@ -1,32 +1,30 @@
-import { CreateTournamentDTO, UpdateTournamentByIdDTO } from "@/models/dtos/tournaments";
+import { CreateUserAccoladeDTO, UpdateUserAccoladeByIdDTO } from "@/models/dtos/user-accolades";
 import { execute } from "..";
 import { UUID } from "@/models/db/base-entity";
 
-const CreateTournament = async (dto: CreateTournamentDTO): Promise<UUID | null> => {
+const CreateUserAccolade = async (dto: CreateUserAccoladeDTO): Promise<UUID | null> => {
   try {
     const queryText = `
-      INSERT INTO public.tournaments(name, year, description, created_by)
-      VALUES($1, $2, $3, $4) RETURNING id
+      INSERT INTO public.user_accolades(user_id, accolade_id, created_by)
+      VALUES($1, $2, $3) RETURNING id
     `;
-    const params: any[] = [dto.name, dto.year, dto.description, dto.createdBy];
+    const params: any[] = [dto.userId, dto.accoladeId, dto.createdBy];
     const result = await execute(queryText, params);
     return result.rows.length > 0 ? result.rows[0]["id"] : null;
   } catch (error: any) {
-    console.error("Error creating Tournament.", error);
+    console.error("Error creating UserAccolade.", error);
     return null;
   }
 };
 
-const UpdateTournament = async (dto: UpdateTournamentByIdDTO): Promise<number> => {
+const UpdateUserAccolade = async (dto: UpdateUserAccoladeByIdDTO): Promise<number> => {
   try {
     const updates: string[] = [];
     const params: any[] = [dto.id];
     let paramIndex = 2;
     const fields = [
-      { name: "name", value: dto.name },
-      { name: "year", value: dto.year },
-      { name: "description", value: dto.description },
-      { name: "winner_id", value: dto.winnerId },
+      { name: "user_id", value: dto.userId },
+      { name: "accolade_id", value: dto.accoladeId },
       { name: "is_deleted", value: dto.isDeleted },
       { name: "updated_by", value: dto.updatedBy },
     ];
@@ -43,7 +41,7 @@ const UpdateTournament = async (dto: UpdateTournamentByIdDTO): Promise<number> =
     }
 
     const query = `
-      UPDATE public.tournaments
+      UPDATE public.user_accolades
       SET ${updates.join(", ")}
       WHERE id = $1
     `;
@@ -51,9 +49,9 @@ const UpdateTournament = async (dto: UpdateTournamentByIdDTO): Promise<number> =
     const result = await execute(query, params);
     return result.rowCount ?? 0;
   } catch (error: any) {
-    console.error("Error updating Tournament.", error);
+    console.error("Error updating UserAccolade.", error);
     return -1;
   }
 };
 
-export { CreateTournament, UpdateTournament };
+export { CreateUserAccolade, UpdateUserAccolade };

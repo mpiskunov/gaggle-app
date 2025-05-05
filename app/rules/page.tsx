@@ -1,17 +1,17 @@
-import { Grid2 } from "@mui/material";
+import { Grid } from "@mui/material";
 import Image from "next/image";
 
 const RulesPage = () => {
   return (
     <>
-      <Grid2
+      <Grid
         container
         direction="row"
         sx={{
           justifyContent: "center",
         }}
       >
-        <Grid2 size={12} justifyContent={"center"} textAlign={"center"}>
+        <Grid size={12} justifyContent={"center"} textAlign={"center"}>
           <div
             style={{
               display: "inline-flex",
@@ -39,8 +39,8 @@ const RulesPage = () => {
           >
             <Image src={"/rules/rules15-18-O.png"} width={1000} height={1000} alt="rules" />
           </div>
-        </Grid2>
-      </Grid2>
+        </Grid>
+      </Grid>
     </>
   );
 };
