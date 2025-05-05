@@ -1,4 +1,4 @@
-import { TournamentCourseRoundDTO } from "@/models/dtos/tournament-course-round";
+import { TournamentCourseRoundDTO } from "@/models/dtos/tournament-course-rounds";
 import { query } from "..";
 import { UUID } from "@/models/db/base-entity";
 
@@ -14,7 +14,7 @@ const GetTournamentCourseRoundById = async (id: UUID): Promise<TournamentCourseR
     const result = await query(text, params);
     if (result.rowCount === 0) return null;
     const item = result.rows[0];
-    const accolade: TournamentCourseRoundDTO = {
+    const dto: TournamentCourseRoundDTO = {
       id: item["id"],
       courseId: item["courseId"],
       tournamentCourseId: item["tournamentCourseId"],
@@ -26,7 +26,7 @@ const GetTournamentCourseRoundById = async (id: UUID): Promise<TournamentCourseR
       penaltyDate: item["penaltyDate"],
       isDeleted: item["isDeleted"],
     };
-    return accolade;
+    return dto;
   } catch (error: any) {
     console.error(`Error getting TournamentCourseRound: ${id}`, error);
     return null;
@@ -37,11 +37,11 @@ const GetAllTournamentCourseRounds = async ({ includeDeleted = false } = {}): Pr
   try {
     const params: any[] = [includeDeleted];
     const text = `
-    SELECT * 
-    FROM public.tournament_course_rounds
-    WHERE is_deleted = FALSE 
-    OR (is_deleted = TRUE AND $1 = TRUE);
-  `;
+      SELECT * 
+      FROM public.tournament_course_rounds
+      WHERE is_deleted = FALSE 
+      OR (is_deleted = TRUE AND $1 = TRUE);
+    `;
     const result = await query(text, params);
 
     if (result.rowCount == 0) return [];

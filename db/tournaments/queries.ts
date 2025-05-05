@@ -1,46 +1,62 @@
-import { GetTournamentByIdDTO, TournamentDTO } from "@/models/dtos/tournaments";
+import { TournamentDTO } from "@/models/dtos/tournaments";
 import { query } from "..";
 import { UUID } from "@/models/db/base-entity";
 
-const GetTournamentById = async (tournamentId: UUID): Promise<GetTournamentByIdDTO | null> => {
-  const result = await query(
-    `
-        SELECT * 
-        FROM tournaments 
-        WHERE id = '${tournamentId}'
-    `
-  );
-  if (result.rowCount == 0) return null;
-  const Tournament: TournamentDTO = {
-    id: result.rows[0]["id"],
-    name: result.rows[0]["name"],
-    year: result.rows[0]["year"],
-    description: result.rows[0]["description"],
-    winnerId: result.rows[0]["winner_id"],
-    isDeleted: result.rows[0]["isDeleted"],
-  };
-  return Tournament;
+const GetTournamentById = async (id: UUID): Promise<TournamentDTO | null> => {
+  try {
+    const params: any[] = [id];
+    const text = `
+      SELECT * 
+      FROM public.tournaments
+      WHERE id = $1
+    `;
+
+    const result = await query(text, params);
+    if (result.rowCount === 0) return null;
+    const item = result.rows[0];
+    const dto: TournamentDTO = {
+      id: item["id"],
+      isDeleted: item["is_deleted"],
+      name: item["name"],
+      year: item["year"],
+      description: item["description"],
+      winnerId: item["winner_id"],
+    };
+    return dto;
+  } catch (error: any) {
+    console.error(`Error getting Tournament: ${id}`, error);
+    return null;
+  }
 };
 
 const GetAllTournaments = async ({ includeDeleted = false } = {}): Promise<TournamentDTO[] | []> => {
-  let queryString = ` 
-        SELECT * 
-        FROM tournaments `;
-  if (!includeDeleted) queryString += "WHERE is_deleted = true";
-  const result = await query(queryString);
-  if (result.rowCount == 0) return [];
+  try {
+    const params: any[] = [includeDeleted];
+    const text = `
+      SELECT * 
+      FROM public.tournaments
+      WHERE is_deleted = FALSE 
+      OR (is_deleted = TRUE AND $1 = TRUE);
+    `;
+    const result = await query(text, params);
 
-  const TournamentList: TournamentDTO[] = result.rows.map((tournament) => {
-    return {
-      id: tournament["id"],
-      name: tournament["name"],
-      year: tournament["year"],
-      description: tournament["description"],
-      winnerId: tournament["winner_id"],
-      isDeleted: tournament["is_deleted"],
-    };
-  });
-  return TournamentList;
+    if (result.rowCount == 0) return [];
+
+    const list: TournamentDTO[] = result.rows.map((item) => {
+      return {
+        id: item["id"],
+        isDeleted: item["is_deleted"],
+        name: item["name"],
+        year: item["year"],
+        description: item["description"],
+        winnerId: item["winner_id"],
+      };
+    });
+    return list;
+  } catch (error: any) {
+    console.error(`Error getting all Tournaments.`, error);
+    return [];
+  }
 };
 
 export { GetTournamentById, GetAllTournaments };

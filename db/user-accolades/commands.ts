@@ -1,32 +1,30 @@
-import { CreateGaggleUserDTO, UpdateGaggleUserByIdDTO } from "@/models/dtos/gaggle_users";
+import { CreateUserAccoladeDTO, UpdateUserAccoladeByIdDTO } from "@/models/dtos/user-accolades";
 import { execute } from "..";
 import { UUID } from "@/models/db/base-entity";
 
-const CreateGaggleUser = async (dto: CreateGaggleUserDTO): Promise<UUID | null> => {
+const CreateUserAccolade = async (dto: CreateUserAccoladeDTO): Promise<UUID | null> => {
   try {
     const queryText = `
-    INSERT INTO public.gaggle_users(first_name, last_name, email, external_user_id, created_by) 
-    VALUES($1, $2, $3, $4, $5) RETURNING id
-  `;
-    const params: any[] = [dto.firstName, dto.lastName, dto.email, dto.externalUserlId, dto.createdBy];
+      INSERT INTO public.user_accolades(user_id, accolade_id, created_by)
+      VALUES($1, $2, $3) RETURNING id
+    `;
+    const params: any[] = [dto.userId, dto.accoladeId, dto.createdBy];
     const result = await execute(queryText, params);
     return result.rows.length > 0 ? result.rows[0]["id"] : null;
   } catch (error: any) {
-    console.error("Error creating GaggleUser.", error);
+    console.error("Error creating UserAccolade.", error);
     return null;
   }
 };
 
-const UpdateGaggleUser = async (dto: UpdateGaggleUserByIdDTO): Promise<number> => {
+const UpdateUserAccolade = async (dto: UpdateUserAccoladeByIdDTO): Promise<number> => {
   try {
     const updates: string[] = [];
     const params: any[] = [dto.id];
     let paramIndex = 2;
     const fields = [
-      { name: "first_name", value: dto.firstName },
-      { name: "last_name", value: dto.lastName },
-      { name: "email", value: dto.email },
-      { name: "external_user_id", value: dto.externalUserlId },
+      { name: "user_id", value: dto.userId },
+      { name: "accolade_id", value: dto.accoladeId },
       { name: "is_deleted", value: dto.isDeleted },
       { name: "updated_by", value: dto.updatedBy },
     ];
@@ -43,7 +41,7 @@ const UpdateGaggleUser = async (dto: UpdateGaggleUserByIdDTO): Promise<number> =
     }
 
     const query = `
-      UPDATE public.gaggle_users
+      UPDATE public.user_accolades
       SET ${updates.join(", ")}
       WHERE id = $1
     `;
@@ -51,9 +49,9 @@ const UpdateGaggleUser = async (dto: UpdateGaggleUserByIdDTO): Promise<number> =
     const result = await execute(query, params);
     return result.rowCount ?? 0;
   } catch (error: any) {
-    console.error("Error updating GaggleUser.", error);
+    console.error("Error updating UserAccolade.", error);
     return -1;
   }
 };
 
-export { CreateGaggleUser, UpdateGaggleUser };
+export { CreateUserAccolade, UpdateUserAccolade };

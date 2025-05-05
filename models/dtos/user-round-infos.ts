@@ -1,9 +1,10 @@
 import { UUID } from "../db/base-entity";
 
 export interface CreateUserRoundInfoDTO {
-  name: string;
-  description: string;
-  value: string;
+  userId: UUID;
+  tournamentCourseRoundId: UUID;
+  grossStrokes: number;
+  isPublished: boolean;
   createdBy: UUID;
 }
 
@@ -13,17 +14,19 @@ export interface GetUserRoundInfoByIdDTO {
 
 export interface UpdateUserRoundInfoByIdDTO {
   id: UUID;
-  name?: string;
-  description?: string;
-  value?: string;
+  userId?: UUID;
+  tournamentCourseRoundId?: UUID;
+  grossStrokes?: number;
+  isPublished?: boolean;
   isDeleted?: boolean;
   updatedBy: UUID;
 }
 
 export interface UserRoundInfoDTO {
   id: UUID;
-  name: string;
-  value: string;
-  description: string;
+  userId: UUID;
+  tournamentCourseRoundId: UUID;
+  grossStrokes: number;
+  isPublished: boolean;
   isDeleted: boolean;
 }
