@@ -5,6 +5,7 @@ export interface CreateGaggleUserDTO {
   lastName: string;
   email: string;
   externalUserlId: string;
+  avatar?: string;
   createdBy: UUID;
 }
 
@@ -18,6 +19,7 @@ export interface UpdateGaggleUserByIdDTO {
   lastName?: string;
   email?: string;
   externalUserlId?: string;
+  avatar?: string;
   isDeleted?: boolean;
   updatedBy: UUID;
 }
@@ -28,5 +30,6 @@ export interface GaggleUserDTO {
   lastName: string;
   email: string;
   externalUserlId: string;
+  avatar?: string;
   isDeleted: boolean;
 }
