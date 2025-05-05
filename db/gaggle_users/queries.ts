@@ -20,6 +20,7 @@ const GetUserByExternalId = async (externalUserId: string): Promise<GaggleUserDT
     email: item["email"],
     isDeleted: item["is_deleted"],
     externalUserlId: item["external_user_id"],
+    avatar: item["avatar"],
   };
   return user;
 };

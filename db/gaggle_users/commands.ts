@@ -5,10 +5,10 @@ import { UUID } from "@/models/db/base-entity";
 const CreateGaggleUser = async (dto: CreateGaggleUserDTO): Promise<UUID | null> => {
   try {
     const queryText = `
-    INSERT INTO public.gaggle_users(first_name, last_name, email, external_user_id, created_by) 
-    VALUES($1, $2, $3, $4, $5) RETURNING id
+    INSERT INTO public.gaggle_users(first_name, last_name, email, external_user_id, created_by, avatar) 
+    VALUES($1, $2, $3, $4, $5, $6) RETURNING id
   `;
-    const params: any[] = [dto.firstName, dto.lastName, dto.email, dto.externalUserlId, dto.createdBy];
+    const params: any[] = [dto.firstName, dto.lastName, dto.email, dto.externalUserlId, dto.createdBy, dto.avatar];
     const result = await execute(queryText, params);
     return result.rows.length > 0 ? result.rows[0]["id"] : null;
   } catch (error: any) {
@@ -27,6 +27,7 @@ const UpdateGaggleUser = async (dto: UpdateGaggleUserByIdDTO): Promise<number> =
       { name: "last_name", value: dto.lastName },
       { name: "email", value: dto.email },
       { name: "external_user_id", value: dto.externalUserlId },
+      { name: "avatar", value: dto.avatar },
       { name: "is_deleted", value: dto.isDeleted },
       { name: "updated_by", value: dto.updatedBy },
     ];
