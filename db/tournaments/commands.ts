@@ -57,18 +57,3 @@ const UpdateTournament = async (dto: UpdateTournamentByIdDTO): Promise<number> =
 };
 
 export { CreateTournament, UpdateTournament };
-
-// import { CreateTournamentDTO } from "@/models/dtos/tournaments";
-// import { execute } from "..";
-
-// const CreateTournament = async (dto: CreateTournamentDTO) => {
-//   const queryText = `
-//     INSERT INTO public.tournaments(name, year, description, created_by)
-//     VALUES($1, $2, $3, $4) RETURNING id
-//   `;
-//   const params: any[] = [dto.name, dto.year, dto.description, dto.createdBy];
-//   const result = await execute(queryText, params);
-//   return result.rows;
-// };
-
-// export { CreateTournament };
