@@ -1,4 +1,4 @@
-import { Box, Grid2, Paper, Typography } from "@mui/material";
+import { Box, Grid, Paper, Typography } from "@mui/material";
 import Image from "next/image";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
@@ -40,11 +40,11 @@ const AboutPage = () => {
   return (
     <>
       <Box sx={{ width: "100%", bgcolor: `primary.light` }}>
-        <Grid2 container justifyContent={"center"} alignItems={"center"} py={4} borderBottom={"1px solid black"}>
-          <Grid2 py={4} size={12} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+        <Grid container justifyContent={"center"} alignItems={"center"} py={4} borderBottom={"1px solid black"}>
+          <Grid py={4} size={12} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             <Typography variant="h2">About</Typography>
-          </Grid2>
-          <Grid2 size={12} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+          </Grid>
+          <Grid size={12} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             {/* <Image src="/gaggle-icons/commissioner.jpg" height="800" width="800" alt="gaggle"></Image> */}
             <ImageList sx={{ width: 800, height: 800 }}>
               {itemData.map((item) => (
@@ -59,13 +59,13 @@ const AboutPage = () => {
                 </ImageListItem>
               ))}
             </ImageList>
-          </Grid2>
-          <Grid2 pt={4} size={12} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+          </Grid>
+          <Grid pt={4} size={12} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             <Typography variant="h4">
               <i>&quot;Where fowl play is par for the course&quot;</i>
             </Typography>
-          </Grid2>
-          <Grid2 p={4} size={{ xs: 12, lg: 8 }} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+          </Grid>
+          <Grid p={4} size={{ xs: 12, lg: 8 }} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             <Paper elevation={24}>
               <Typography variant="h6" p={3}>
                 There’s nothing quite like the illustrious prestige of the golf course. The gently rolling greens. Fairways for days that reach out to
@@ -79,18 +79,18 @@ const AboutPage = () => {
                 today where fowl language is common practice and fellow members are quick with a chirp. After all “golf is for the birds”.
               </Typography>
             </Paper>
-          </Grid2>
-          <Grid2 py={4} size={12} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+          </Grid>
+          <Grid py={4} size={12} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             <Typography variant="h2">Contact</Typography>
-          </Grid2>
-          <Grid2 p={4} size={{ xs: 12, lg: 8 }} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+          </Grid>
+          <Grid p={4} size={{ xs: 12, lg: 8 }} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             <Paper elevation={24}>
               <Typography variant="h6" p={3}>
                 jake@golfgaggle.com
               </Typography>
             </Paper>
-          </Grid2>
-        </Grid2>
+          </Grid>
+        </Grid>
       </Box>
     </>
   );

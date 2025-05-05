@@ -1,17 +1,17 @@
-import { Grid2, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import Image from "next/image";
 
 const AboutPage = () => {
   return (
     <>
-      <Grid2
+      <Grid
         container
         direction="row"
         sx={{
           justifyContent: "center",
         }}
       >
-        <Grid2 size={12} justifyContent={"center"} textAlign={"center"}>
+        <Grid size={12} justifyContent={"center"} textAlign={"center"}>
           <div
             style={{
               display: "inline-flex",
@@ -21,9 +21,9 @@ const AboutPage = () => {
           >
             <Typography variant="h1">About</Typography>
           </div>
-        </Grid2>
+        </Grid>
 
-        <Grid2 size={12} justifyContent={"center"} textAlign={"center"}>
+        <Grid size={12} justifyContent={"center"} textAlign={"center"}>
           <div
             style={{
               display: "inline-flex",
@@ -33,8 +33,8 @@ const AboutPage = () => {
           >
             <Image src={"/rules/about-gaggle.png"} width={1000} height={1000} alt="rules" />
           </div>
-        </Grid2>
-        <Grid2 size={12} justifyContent={"center"} textAlign={"center"}>
+        </Grid>
+        <Grid size={12} justifyContent={"center"} textAlign={"center"}>
           <div
             style={{
               display: "inline-flex",
@@ -44,8 +44,8 @@ const AboutPage = () => {
           >
             <Image src={"/rules/about-commissioner.png"} width={1000} height={1000} alt="rules" />
           </div>
-        </Grid2>
-      </Grid2>
+        </Grid>
+      </Grid>
     </>
   );
 };
