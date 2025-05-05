@@ -14,14 +14,14 @@ const GetCourseById = async (id: UUID): Promise<CourseDTO | null> => {
     const result = await query(text, params);
     if (result.rowCount === 0) return null;
     const item = result.rows[0];
-    const accolade: CourseDTO = {
+    const dto: CourseDTO = {
       id: item["id"],
       name: item["name"],
       description: item["description"],
       address: item["address"],
       isDeleted: item["is_deleted"],
     };
-    return accolade;
+    return dto;
   } catch (error: any) {
     console.error(`Error getting Course: ${id}`, error);
     return null;
@@ -32,11 +32,11 @@ const GetAllCourses = async ({ includeDeleted = false } = {}): Promise<CourseDTO
   try {
     const params: any[] = [includeDeleted];
     const text = `
-    SELECT * 
-    FROM public.courses
-    WHERE is_deleted = FALSE 
-    OR (is_deleted = TRUE AND $1 = TRUE);
-  `;
+      SELECT * 
+      FROM public.courses
+      WHERE is_deleted = FALSE 
+      OR (is_deleted = TRUE AND $1 = TRUE);
+    `;
     const result = await query(text, params);
 
     if (result.rowCount == 0) return [];

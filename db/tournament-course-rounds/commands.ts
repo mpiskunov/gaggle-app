@@ -1,4 +1,4 @@
-import { CreateTournamentCourseRoundDTO, UpdateTournamentCourseRoundByIdDTO } from "@/models/dtos/tournament-course-round";
+import { CreateTournamentCourseRoundDTO, UpdateTournamentCourseRoundByIdDTO } from "@/models/dtos/tournament-course-rounds";
 import { execute } from "..";
 import { UUID } from "@/models/db/base-entity";
 
@@ -17,7 +17,17 @@ const CreateTournamentCourseRound = async (dto: CreateTournamentCourseRoundDTO):
       penalty_date)
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);
   `;
-    const params: any[] = [dto.createdBy, dto.courseId, dto.tournamentCourseId, dto.courseRoundNumber, dto.numberOfHoles, dto.tournamentRoundNumber, dto.startDate, dto.endDate, dto.penaltyDate];
+    const params: any[] = [
+      dto.createdBy,
+      dto.courseId,
+      dto.tournamentCourseId,
+      dto.courseRoundNumber,
+      dto.numberOfHoles,
+      dto.tournamentRoundNumber,
+      dto.startDate,
+      dto.endDate,
+      dto.penaltyDate,
+    ];
     const result = await execute(queryText, params);
     return result.rows.length > 0 ? result.rows[0]["id"] : null;
   } catch (error: any) {

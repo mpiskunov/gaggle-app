@@ -1,39 +1,38 @@
-import { AccoladeDTO } from "@/models/dtos/accolades";
+import { UserAccoladeDTO } from "@/models/dtos/user-accolades";
 import { query } from "..";
 import { UUID } from "@/models/db/base-entity";
 
-const GetAccoladeById = async (id: UUID): Promise<AccoladeDTO | null> => {
+const GetUserAccoladeById = async (id: UUID): Promise<UserAccoladeDTO | null> => {
   try {
     const params: any[] = [id];
     const text = `
       SELECT * 
-      FROM public.accolades
+      FROM public.user_accolades
       WHERE id = $1
     `;
 
     const result = await query(text, params);
     if (result.rowCount === 0) return null;
     const item = result.rows[0];
-    const accolade: AccoladeDTO = {
+    const dto: UserAccoladeDTO = {
       id: item["id"],
-      name: item["name"],
-      description: item["description"],
-      value: item["value"],
       isDeleted: item["is_deleted"],
+      userId: item["user_id"],
+      accoladeId: item["accolade_id"],
     };
-    return accolade;
+    return dto;
   } catch (error: any) {
-    console.error(`Error getting Accolade: ${id}`, error);
+    console.error(`Error getting UserAccolade: ${id}`, error);
     return null;
   }
 };
 
-const GetAllAccolades = async ({ includeDeleted = false } = {}): Promise<AccoladeDTO[] | []> => {
+const GetAllUserAccolades = async ({ includeDeleted = false } = {}): Promise<UserAccoladeDTO[] | []> => {
   try {
     const params: any[] = [includeDeleted];
     const text = `
       SELECT * 
-      FROM public.accolades
+      FROM public.user_accolades
       WHERE is_deleted = FALSE 
       OR (is_deleted = TRUE AND $1 = TRUE);
     `;
@@ -41,20 +40,19 @@ const GetAllAccolades = async ({ includeDeleted = false } = {}): Promise<Accolad
 
     if (result.rowCount == 0) return [];
 
-    const list: AccoladeDTO[] = result.rows.map((item) => {
+    const list: UserAccoladeDTO[] = result.rows.map((item) => {
       return {
         id: item["id"],
-        name: item["name"],
-        description: item["description"],
-        value: item["value"],
         isDeleted: item["is_deleted"],
+        userId: item["user_id"],
+        accoladeId: item["accolade_id"],
       };
     });
     return list;
   } catch (error: any) {
-    console.error(`Error getting all Accolades.`, error);
+    console.error(`Error getting all UserAccolades.`, error);
     return [];
   }
 };
 
-export { GetAccoladeById, GetAllAccolades };
+export { GetUserAccoladeById, GetAllUserAccolades };
