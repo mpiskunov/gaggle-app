@@ -1,45 +1,81 @@
 import { GaggleUserDTO } from "@/models/dtos/gaggle_users";
 import { query } from "..";
+import { UUID } from "@/models/db/base-entity";
 
 const GetUserByExternalId = async (externalUserId: string): Promise<GaggleUserDTO | null> => {
-  const result = await query(
-    `
-        SELECT * 
-        FROM gaggle_users 
-        WHERE external_user_id = '${externalUserId}'
-    `
-  );
+  const params: any[] = [externalUserId];
+  const text = `
+    SELECT * 
+    FROM public.gaggle_users 
+    WHERE external_user_id = $1
+  `;
+
+  const result = await query(text, params);
   if (result.rowCount == 0) return null;
+  const item = result.rows[0];
   const user: GaggleUserDTO = {
-    id: result.rows[0]["id"],
-    firstName: result.rows[0]["first_name"],
-    lastName: result.rows[0]["last_name"],
-    email: result.rows[0]["email"],
-    isDeleted: result.rows[0]["is_deleted"],
+    id: item["id"],
+    firstName: item["first_name"],
+    lastName: item["last_name"],
+    email: item["email"],
+    isDeleted: item["is_deleted"],
   };
   return user;
 };
 
-const GetAllUsers = async ({ includeDeleted = false } = {}): Promise<GaggleUserDTO[]> => {
-  const result = await query(
-    `
-        SELECT * 
-        FROM gaggle_users 
-        WHERE is_deleted = '${includeDeleted}'
-    `
-  );
-  if (result.rowCount == 0) return [];
+const GetGaggleUserById = async (id: UUID): Promise<GaggleUserDTO | null> => {
+  try {
+    const params: any[] = [id];
+    const text = `
+      SELECT * 
+      FROM public.gaggle_users
+      WHERE id = $1
+    `;
 
-  const userList: GaggleUserDTO[] = result.rows.map((user) => {
-    return {
-      id: user["id"],
-      firstName: user["first_name"],
-      lastName: user["last_name"],
-      email: user["email"],
-      isDeleted: user["is_deleted"],
+    const result = await query(text, params);
+    if (result.rowCount === 0) return null;
+    const item = result.rows[0];
+    const dto: GaggleUserDTO = {
+      id: item["id"],
+      firstName: item["first_name"],
+      lastName: item["last_name"],
+      email: item["email"],
+      isDeleted: item["is_deleted"],
     };
-  });
-  return userList;
+    return dto;
+  } catch (error: any) {
+    console.error(`Error getting GaggleUser: ${id}`, error);
+    return null;
+  }
 };
 
-export { GetUserByExternalId, GetAllUsers };
+const GetAllGaggleUsers = async ({ includeDeleted = false } = {}): Promise<GaggleUserDTO[] | []> => {
+  try {
+    const params: any[] = [includeDeleted];
+    const text = `
+      SELECT * 
+      FROM public.gaggle_users
+      WHERE is_deleted = FALSE 
+      OR (is_deleted = TRUE AND $1 = TRUE);
+    `;
+    const result = await query(text, params);
+
+    if (result.rowCount == 0) return [];
+
+    const list: GaggleUserDTO[] = result.rows.map((item) => {
+      return {
+        id: item["id"],
+        firstName: item["first_name"],
+        lastName: item["last_name"],
+        email: item["email"],
+        isDeleted: item["is_deleted"],
+      };
+    });
+    return list;
+  } catch (error: any) {
+    console.error(`Error getting all GaggleUsers.`, error);
+    return [];
+  }
+};
+
+export { GetUserByExternalId, GetGaggleUserById, GetAllGaggleUsers };
