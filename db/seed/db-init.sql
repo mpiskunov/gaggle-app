@@ -56,6 +56,7 @@ CREATE TABLE IF NOT EXISTS public.gaggle_users
     created_date timestamp without time zone NOT NULL DEFAULT (now() AT TIME ZONE 'utc'::text),
     updated_date timestamp without time zone,
     is_deleted boolean NOT NULL DEFAULT false,
+    avatar text COLLATE pg_catalog."default",
     CONSTRAINT gaggle_users_pkey PRIMARY KEY (id)
 )
 
@@ -84,6 +85,7 @@ CREATE TABLE IF NOT EXISTS public.tournaments
     updated_date timestamp without time zone,
     is_deleted boolean NOT NULL DEFAULT false,
     winner_id uuid,
+    code character varying(50) COLLATE pg_catalog."default" NOT NULL,
     CONSTRAINT tournaments_pkey PRIMARY KEY (id),
     CONSTRAINT fk_gaggle_users_tournaments_created_by FOREIGN KEY (winner_id)
         REFERENCES public.gaggle_users (id) MATCH SIMPLE

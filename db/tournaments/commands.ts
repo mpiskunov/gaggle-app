@@ -5,10 +5,10 @@ import { UUID } from "@/models/db/base-entity";
 const CreateTournament = async (dto: CreateTournamentDTO): Promise<UUID | null> => {
   try {
     const queryText = `
-      INSERT INTO public.tournaments(name, year, description, created_by)
-      VALUES($1, $2, $3, $4) RETURNING id
+      INSERT INTO public.tournaments(name, year, description, created_by, code)
+      VALUES($1, $2, $3, $4, $5) RETURNING id
     `;
-    const params: any[] = [dto.name, dto.year, dto.description, dto.createdBy];
+    const params: any[] = [dto.name, dto.year, dto.description, dto.createdBy, dto.code];
     const result = await execute(queryText, params);
     return result.rows.length > 0 ? result.rows[0]["id"] : null;
   } catch (error: any) {
@@ -29,6 +29,7 @@ const UpdateTournament = async (dto: UpdateTournamentByIdDTO): Promise<number> =
       { name: "winner_id", value: dto.winnerId },
       { name: "is_deleted", value: dto.isDeleted },
       { name: "updated_by", value: dto.updatedBy },
+      { name: "code", value: dto.code },
     ];
 
     for (const field of fields) {

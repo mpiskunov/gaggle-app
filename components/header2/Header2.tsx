@@ -16,6 +16,7 @@ import { signIn, signOut } from "next-auth/react";
 import { Session } from "next-auth";
 import { getSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import { title } from "process";
 
 const navItems = [
   {
@@ -30,18 +31,9 @@ const navItems = [
     title: "rules",
     href: "/rules",
   },
-
   {
-    title: "contact",
-    href: "/contact",
-  },
-  {
-    title: "user",
-    href: "/user",
-  },
-  {
-    title: "secret",
-    href: "/secret",
+    title: "tournaments",
+    href: "/tournaments",
   },
 ];
 

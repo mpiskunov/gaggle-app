@@ -1,15 +1,17 @@
 import { BaseEntity, UUID } from "./base-entity";
 
 export class Tournament extends BaseEntity {
-  constructor(createdBy: string, createdDate: Date, name: string, year: string, winnerId: UUID, description: string) {
+  constructor(createdBy: string, createdDate: Date, name: string, year: string, winnerId: UUID, description: string, code: string) {
     super(createdBy, createdDate);
     this.name = name;
     this.year = year;
     this.winnerId = winnerId;
     this.description = description;
+    this.code = code;
   }
   name: string;
   year: string;
   winnerId: UUID;
   description: string;
+  code: string;
 }
