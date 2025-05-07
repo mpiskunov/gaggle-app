@@ -1,7 +1,7 @@
 "use client";
 import BasicTable from "@/components/home-grid/HomeGrid";
-import CoopTable from "@/components/coop/Coop";
 import { Alert, AlertTitle, Box, Button, Grid } from "@mui/material";
+import SittingDuckTable from "@/components/sitting-duck-table/sitting-duck-table";
 
 const Home = () => {
   return (
@@ -14,6 +14,7 @@ const Home = () => {
             SUBMIT
           </Button>
         }
+        sx={{ bgcolor: "#D4AF37" }}
       >
         Did you golf today?
       </Alert>
@@ -23,7 +24,7 @@ const Home = () => {
           <Grid size={{ xs: 12, sm: 3, lg: 2 }} textAlign={"center"}></Grid>
           <Grid size={{ xs: 12, sm: 12, lg: 8 }} textAlign={"center"} position={"relative"} zIndex={12}>
             <BasicTable />
-            <CoopTable />
+            <SittingDuckTable />
           </Grid>
           <Grid size={{ xs: 12, sm: 3, lg: 2 }} textAlign={"center"}></Grid>
         </Grid>

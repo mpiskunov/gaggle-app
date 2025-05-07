@@ -18,7 +18,7 @@ const Page = () => {
         <Paper elevation={10}>
           <Grid container spacing={2} border={"1px solid black"} mt={3} maxWidth={"lg"} alignItems={"center"}>
             <Grid size={{ xs: 12, md: 2 }} display={"flex"} sx={{ justifyContent: { xs: "center", md: "left" } }}>
-              <Image src={`/gaggle-icons/GoldenGoose.png`} height={75} width={75} alt="haha" />
+              <Image src={`/gaggle-icons/gaggle_open.png`} height={500} width={500} alt="haha" style={{ borderRadius: "50%" }} />
             </Grid>
             <Grid size={{ xs: 10, md: 8 }} display={"flex"} justifyContent={"center"}>
               <Typography sx={{ fontSize: { xs: "1.5rem" } }}>Gaggle Tournament 2025</Typography>
