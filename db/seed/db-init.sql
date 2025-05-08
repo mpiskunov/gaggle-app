@@ -135,7 +135,7 @@ CREATE TABLE IF NOT EXISTS public.courses
     updated_by uuid,
     created_date timestamp without time zone NOT NULL DEFAULT (now() AT TIME ZONE 'utc'::text),
     updated_date timestamp without time zone,
-    is_deleted boolean NOT NULL DEFAULT false,
+    is_deleted boolean NOT NULL DEFAULT false,  
     CONSTRAINT courses_pkey PRIMARY KEY (id),
     CONSTRAINT fk_gaggle_users_courses_created_by FOREIGN KEY (created_by)
         REFERENCES public.gaggle_users (id) MATCH SIMPLE
@@ -308,7 +308,8 @@ CREATE TABLE IF NOT EXISTS public.tournament_courses
     is_deleted boolean NOT NULL DEFAULT false,
     tournament_id uuid NOT NULL,
     course_id uuid NOT NULL,
-    winner_id uuid NOT NULL,
+    winner_id uuid,
+    "order" smallint NOT NULL,
     CONSTRAINT tournament_courses_pkey PRIMARY KEY (id),
     CONSTRAINT fk_courses_tournament_courses_course_id FOREIGN KEY (course_id)
         REFERENCES public.courses (id) MATCH SIMPLE
