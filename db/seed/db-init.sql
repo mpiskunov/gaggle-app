@@ -401,6 +401,7 @@ CREATE TABLE IF NOT EXISTS public.tournament_course_rounds
     start_date time without time zone NOT NULL,
     end_date time without time zone NOT NULL,
     penalty_date time without time zone,
+    tournament_id uuid NOT NULL,
     CONSTRAINT tournament_course_rounds_pkey PRIMARY KEY (id),
     CONSTRAINT fk_courses_tournament_course_rounds_course_id FOREIGN KEY (course_id)
         REFERENCES public.courses (id) MATCH SIMPLE
@@ -416,6 +417,10 @@ CREATE TABLE IF NOT EXISTS public.tournament_course_rounds
         ON DELETE NO ACTION,
     CONSTRAINT fk_tournament_courses_tournament_course_rounds_tournament_cours FOREIGN KEY (tournament_course_id)
         REFERENCES public.tournament_courses (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT fk_tournaments_tournament_course_rounds_tournament_id FOREIGN KEY (tournament_id)
+        REFERENCES public.tournaments (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 )
@@ -456,6 +461,24 @@ CREATE INDEX IF NOT EXISTS fki_fk_tournament_courses_tournament_course_rounds_to
     ON public.tournament_course_rounds USING btree
     (tournament_course_id ASC NULLS LAST)
     TABLESPACE pg_default;
+-- Index: fki_g
+
+-- DROP INDEX IF EXISTS public.fki_g;
+
+CREATE INDEX IF NOT EXISTS fki_g
+    ON public.tournament_course_rounds USING btree
+    (tournament_id ASC NULLS LAST)
+    TABLESPACE pg_default;
+
+-- Trigger: set_update_timestamp_trigger_tournament_course_rounds
+
+-- DROP TRIGGER IF EXISTS set_update_timestamp_trigger_tournament_course_rounds ON public.tournament_course_rounds;
+
+CREATE OR REPLACE TRIGGER set_update_timestamp_trigger_tournament_course_rounds
+    BEFORE UPDATE 
+    ON public.tournament_course_rounds
+    FOR EACH ROW
+    EXECUTE FUNCTION public.trigger_set_timestamp();
 
 -----------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------
