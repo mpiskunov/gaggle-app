@@ -16,39 +16,42 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       if (account) {
         token.external_id = profile?.sub;
         token.groups = profile?.groups;
+        if (token.picture == null) {
+          var user = await GetUserByExternalId(token.external_id as string);
+          token.picture = user?.avatar;
+        }
       }
       return token;
     },
     async session({ session, token }) {
-      if (session.user.image == null) {
-        var user = await GetUserByExternalId(token.external_id as string);
-        token.picture = user?.avatar;
-      }
       session.external_id = token.external_id;
       session.groups = token.groups;
       return session;
     },
+    async signIn({ user, account, profile }) {
+      var userFromDb = await GetUserByExternalId(profile?.sub ?? "");
+      if (userFromDb) {
+      } else {
+        if (profile) {
+          const email = profile.email ?? "none";
+          var result = await GetUserFromIdentityProvider(email);
+          var userId = await CreateGaggleUser({
+            firstName: profile.name!.split(" ")[0],
+            lastName: profile.name!.split(" ")[1],
+            email: profile.email!,
+            externalUserlId: profile.sub!,
+            createdBy: process.env.SYSTEM_GUID!,
+            avatar: result.results[0].avatar,
+          });
+          console.log(`created user: ${userId}`);
+        }
+      }
+
+      return true;
+    },
   },
   events: {
-    async signIn(msg) {
-      var user = await GetUserByExternalId(msg.profile?.sub ?? "");
-      if (user) {
-        //console.log("user exists");
-      } else {
-        //console.log("user does not exist");
-        const email = msg.user.email ?? "none";
-        var result = await GetUserFromIdentityProvider(email);
-        var userId = await CreateGaggleUser({
-          firstName: msg.user.name!.split(" ")[0],
-          lastName: msg.user.name!.split(" ")[1],
-          email: msg.user.email!,
-          externalUserlId: msg.profile!.sub!,
-          createdBy: process.env.SYSTEM_GUID!,
-          avatar: result.results[0].avatar,
-        });
-        console.log(`created user: ${userId}`);
-      }
-    },
+    async signIn(msg) {},
   },
   providers: providers,
 });
