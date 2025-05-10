@@ -18,4 +18,19 @@ INSERT INTO public.tournament_courses(created_by, tournament_id, course_id, winn
 	('60564d85-f3d2-4dd8-b3e6-098495888d52', (SELECT id FROM public.tournaments LIMIT 1), (SELECT id FROM public.courses WHERE name = 'Chemawa'), null, '2'),
 	('60564d85-f3d2-4dd8-b3e6-098495888d52', (SELECT id FROM public.tournaments LIMIT 1), (SELECT id FROM public.courses WHERE name = 'Crystal Lake'), null, '3'),
 	('60564d85-f3d2-4dd8-b3e6-098495888d52', (SELECT id FROM public.tournaments LIMIT 1), (SELECT id FROM public.courses WHERE name = 'Cranston Country Club'), null, '4')
+	('60564d85-f3d2-4dd8-b3e6-098495888d52', (SELECT id FROM public.tournaments LIMIT 1), (SELECT id FROM public.courses WHERE name = 'CT National'), null, '5')
+	;
+
+
+INSERT INTO public.tournament_course_rounds(
+	created_by, course_id, tournament_course_id, course_round_number, number_of_holes, tournament_round_number, start_date, end_date, tournament_id)
+	VALUES 
+	('60564d85-f3d2-4dd8-b3e6-098495888d52',  (SELECT id FROM public.courses WHERE name = 'Country View'), (SELECT id FROM public.tournament_courses WHERE tournament_id = (SELECT id FROM public.tournaments LIMIT 1) AND "order" = 1), 1, 18, 1, '5-31-2025', '6-14-2025', (SELECT id FROM public.tournaments LIMIT 1)),
+	('60564d85-f3d2-4dd8-b3e6-098495888d52', (SELECT id FROM public.courses WHERE name = 'Chemawa'), (SELECT id FROM public.tournament_courses WHERE tournament_id = (SELECT id FROM public.tournaments LIMIT 1) AND "order" = 2), 1, 9, 2, '6-7-2025', '6-21-2025', (SELECT id FROM public.tournaments LIMIT 1)),
+	('60564d85-f3d2-4dd8-b3e6-098495888d52', (SELECT id FROM public.courses WHERE name = 'Chemawa'), (SELECT id FROM public.tournament_courses WHERE tournament_id = (SELECT id FROM public.tournaments LIMIT 1) AND "order" = 2), 2, 9, 3, '6-14-2025', '6-28-2025', (SELECT id FROM public.tournaments LIMIT 1)),
+	('60564d85-f3d2-4dd8-b3e6-098495888d52', (SELECT id FROM public.courses WHERE name = 'Crystal Lake'), (SELECT id FROM public.tournament_courses WHERE tournament_id = (SELECT id FROM public.tournaments LIMIT 1) AND "order" = 3), 1, 9, 4, '6-21-2025', '7-5-2025', (SELECT id FROM public.tournaments LIMIT 1)),
+	('60564d85-f3d2-4dd8-b3e6-098495888d52', (SELECT id FROM public.courses WHERE name = 'Crystal Lake'), (SELECT id FROM public.tournament_courses WHERE tournament_id = (SELECT id FROM public.tournaments LIMIT 1) AND "order" = 3), 2, 9, 5, '6-28-2025', '7-12-2025', (SELECT id FROM public.tournaments LIMIT 1)),
+	('60564d85-f3d2-4dd8-b3e6-098495888d52', (SELECT id FROM public.courses WHERE name = 'Cranston Country Club'), (SELECT id FROM public.tournament_courses WHERE tournament_id = (SELECT id FROM public.tournaments LIMIT 1) AND "order" = 4), 1, 9, 6, '7-5-2025', '7-19-2025', (SELECT id FROM public.tournaments LIMIT 1)),
+	('60564d85-f3d2-4dd8-b3e6-098495888d52', (SELECT id FROM public.courses WHERE name = 'Cranston Country Club'), (SELECT id FROM public.tournament_courses WHERE tournament_id = (SELECT id FROM public.tournaments LIMIT 1) AND "order" = 4), 2, 9, 7, '7-12-2025', '7-26-2025', (SELECT id FROM public.tournaments LIMIT 1)),
+	('60564d85-f3d2-4dd8-b3e6-098495888d52', (SELECT id FROM public.courses WHERE name = 'CT National'), (SELECT id FROM public.tournament_courses WHERE tournament_id = (SELECT id FROM public.tournaments LIMIT 1) AND "order" = 5), 1, 9, 8, '7-12-2025', '7-26-2025', (SELECT id FROM public.tournaments LIMIT 1))
 	;

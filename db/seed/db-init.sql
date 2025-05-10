@@ -398,10 +398,9 @@ CREATE TABLE IF NOT EXISTS public.tournament_course_rounds
     course_round_number smallint NOT NULL,
     number_of_holes smallint NOT NULL,
     tournament_round_number smallint NOT NULL,
-    start_date time without time zone NOT NULL,
-    end_date time without time zone NOT NULL,
-    penalty_date time without time zone,
     tournament_id uuid NOT NULL,
+    start_date date NOT NULL,
+    end_date date NOT NULL,
     CONSTRAINT tournament_course_rounds_pkey PRIMARY KEY (id),
     CONSTRAINT fk_courses_tournament_course_rounds_course_id FOREIGN KEY (course_id)
         REFERENCES public.courses (id) MATCH SIMPLE
@@ -479,7 +478,6 @@ CREATE OR REPLACE TRIGGER set_update_timestamp_trigger_tournament_course_rounds
     ON public.tournament_course_rounds
     FOR EACH ROW
     EXECUTE FUNCTION public.trigger_set_timestamp();
-
 -----------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------
 

@@ -10,8 +10,7 @@ export class TournamentCourseRound extends BaseEntity {
     numberOfHoles: number,
     tournamentRoundNumber: number,
     startDate: Date,
-    endDate: Date,
-    penaltyDate: Date
+    endDate: Date
   ) {
     super(createdBy, createdDate);
     this.courseId = courseId;
@@ -21,7 +20,6 @@ export class TournamentCourseRound extends BaseEntity {
     this.tournamentRoundNumber = tournamentRoundNumber;
     this.startDate = startDate;
     this.endDate = endDate;
-    this.penaltyDate = penaltyDate;
   }
   courseId: UUID;
   tournamentCourseId: UUID;
@@ -30,5 +28,4 @@ export class TournamentCourseRound extends BaseEntity {
   tournamentRoundNumber: number;
   startDate: Date;
   endDate: Date;
-  penaltyDate: Date;
 }

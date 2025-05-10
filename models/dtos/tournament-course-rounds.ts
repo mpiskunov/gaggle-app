@@ -9,7 +9,6 @@ export interface CreateTournamentCourseRoundDTO {
   tournamentRoundNumber: number;
   startDate: Date;
   endDate: Date;
-  penaltyDate: Date;
   createdBy: UUID;
 }
 
@@ -27,7 +26,6 @@ export interface UpdateTournamentCourseRoundByIdDTO {
   tournamentRoundNumber?: number;
   startDate?: Date;
   endDate?: Date;
-  penaltyDate?: Date;
   isDeleted?: boolean;
   updatedBy: UUID;
 }
@@ -42,6 +40,5 @@ export interface TournamentCourseRoundDTO {
   tournamentRoundNumber: number;
   startDate: Date;
   endDate: Date;
-  penaltyDate: Date;
   isDeleted: boolean;
 }

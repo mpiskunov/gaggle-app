@@ -14,9 +14,8 @@ const CreateTournamentCourseRound = async (dto: CreateTournamentCourseRoundDTO):
       tournament_round_number,
       start_date,
       end_date,
-      penalty_date,
       tournament_id)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);
   `;
     const params: any[] = [
       dto.createdBy,
@@ -27,7 +26,6 @@ const CreateTournamentCourseRound = async (dto: CreateTournamentCourseRoundDTO):
       dto.tournamentRoundNumber,
       dto.startDate,
       dto.endDate,
-      dto.penaltyDate,
       dto.tournamentId,
     ];
     const result = await execute(queryText, params);
@@ -52,7 +50,6 @@ const UpdateTournamentCourseRound = async (dto: UpdateTournamentCourseRoundByIdD
       { name: "tournament_round_number", value: dto.tournamentRoundNumber },
       { name: "start_date", value: dto.startDate },
       { name: "end_date", value: dto.endDate },
-      { name: "penalty_date", value: dto.penaltyDate },
       { name: "is_deleted", value: dto.isDeleted },
       { name: "updated_by", value: dto.updatedBy },
     ];

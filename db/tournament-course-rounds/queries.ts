@@ -23,7 +23,6 @@ const GetTournamentCourseRoundById = async (id: UUID): Promise<TournamentCourseR
       tournamentRoundNumber: item["tournament_round_number"],
       startDate: item["start_date"],
       endDate: item["end_date"],
-      penaltyDate: item["penalty_date"],
       isDeleted: item["is_deleted"],
       tournamentId: item["tournament_id"],
     };
@@ -58,7 +57,6 @@ const GetAllTournamentCourseRounds = async ({ includeDeleted = false } = {}): Pr
         tournamentRoundNumber: item["tournament_round_number"],
         startDate: item["start_date"],
         endDate: item["end_date"],
-        penaltyDate: item["penalty_date"],
         isDeleted: item["is_deleted"],
       };
     });
