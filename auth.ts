@@ -16,12 +16,14 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       if (account) {
         token.external_id = profile?.sub;
         token.groups = profile?.groups;
-        var user = await GetUserByExternalId(profile?.sub ?? "");
-        token.picture = user?.avatar;
       }
       return token;
     },
     async session({ session, token }) {
+      if (session.user.image == null) {
+        var user = await GetUserByExternalId(token.external_id as string);
+        token.picture = user?.avatar;
+      }
       session.external_id = token.external_id;
       session.groups = token.groups;
       return session;
