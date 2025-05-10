@@ -16,15 +16,15 @@ const GetTournamentCourseRoundById = async (id: UUID): Promise<TournamentCourseR
     const item = result.rows[0];
     const dto: TournamentCourseRoundDTO = {
       id: item["id"],
-      courseId: item["courseId"],
-      tournamentCourseId: item["tournamentCourseId"],
-      courseRoundNumber: item["courseRoundNumber"],
-      numberOfHoles: item["numberOfHoles"],
-      tournamentRoundNumber: item["tournamentRoundNumber"],
-      startDate: item["startDate"],
-      endDate: item["endDate"],
-      penaltyDate: item["penaltyDate"],
-      isDeleted: item["isDeleted"],
+      courseId: item["course_id"],
+      tournamentCourseId: item["tournament_course_id"],
+      courseRoundNumber: item["course_round_number"],
+      numberOfHoles: item["number_of_holes"],
+      tournamentRoundNumber: item["tournament_round_number"],
+      startDate: item["start_date"],
+      endDate: item["end_date"],
+      isDeleted: item["is_deleted"],
+      tournamentId: item["tournament_id"],
     };
     return dto;
   } catch (error: any) {
@@ -49,15 +49,15 @@ const GetAllTournamentCourseRounds = async ({ includeDeleted = false } = {}): Pr
     const list: TournamentCourseRoundDTO[] = result.rows.map((item) => {
       return {
         id: item["id"],
-        courseId: item["courseId"],
-        tournamentCourseId: item["tournamentCourseId"],
-        courseRoundNumber: item["courseRoundNumber"],
-        numberOfHoles: item["numberOfHoles"],
-        tournamentRoundNumber: item["tournamentRoundNumber"],
-        startDate: item["startDate"],
-        endDate: item["endDate"],
-        penaltyDate: item["penaltyDate"],
-        isDeleted: item["isDeleted"],
+        courseId: item["course_id"],
+        tournamentCourseId: item["tournament_course_id"],
+        tournamentId: item["tournament_id"],
+        courseRoundNumber: item["course_round_number"],
+        numberOfHoles: item["number_of_holes"],
+        tournamentRoundNumber: item["tournament_round_number"],
+        startDate: item["start_date"],
+        endDate: item["end_date"],
+        isDeleted: item["is_deleted"],
       };
     });
     return list;

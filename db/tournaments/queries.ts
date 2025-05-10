@@ -21,6 +21,7 @@ const GetTournamentById = async (id: UUID): Promise<TournamentDTO | null> => {
       year: item["year"],
       description: item["description"],
       winnerId: item["winner_id"],
+      code: item["code"],
     };
     return dto;
   } catch (error: any) {
@@ -50,6 +51,7 @@ const GetAllTournaments = async ({ includeDeleted = false } = {}): Promise<Tourn
         year: item["year"],
         description: item["description"],
         winnerId: item["winner_id"],
+        code: item["code"],
       };
     });
     return list;
