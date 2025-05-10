@@ -16,10 +16,8 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       if (account) {
         token.external_id = profile?.sub;
         token.groups = profile?.groups;
-        if (token.picture == null) {
-          var user = await GetUserByExternalId(token.external_id as string);
-          token.picture = user?.avatar;
-        }
+        console.log(profile);
+        token.picture = profile?.picture; // this gets populated in the signIn callback
       }
       return token;
     },
@@ -30,9 +28,10 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     },
     async signIn({ user, account, profile }) {
       var userFromDb = await GetUserByExternalId(profile?.sub ?? "");
-      if (userFromDb) {
-      } else {
-        if (profile) {
+      if (profile) {
+        if (userFromDb) {
+          profile.picture = userFromDb.avatar;
+        } else {
           const email = profile.email ?? "none";
           var result = await GetUserFromIdentityProvider(email);
           var userId = await CreateGaggleUser({
@@ -44,6 +43,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
             avatar: result.results[0].avatar,
           });
           console.log(`created user: ${userId}`);
+          profile.picture = result.results[0].avatar;
         }
       }
 
