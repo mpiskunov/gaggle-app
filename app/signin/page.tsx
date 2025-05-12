@@ -2,9 +2,9 @@
 import { useSession, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 
-export default function Page() {
+const SignInWrapper = () => {
   const router = useRouter();
   const { status } = useSession();
   const searchParams = useSearchParams();
@@ -18,5 +18,13 @@ export default function Page() {
     }
   }, [router, searchParams, status]);
 
-  return <div></div>;
+  return null; // Or a loading indicator if you prefer
+};
+
+export default function Page() {
+  return (
+    <Suspense>
+      <SignInWrapper />
+    </Suspense>
+  );
 }

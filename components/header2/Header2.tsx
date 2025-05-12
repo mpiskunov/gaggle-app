@@ -71,7 +71,11 @@ const GaggleHeader = () => {
   };
 
   const handleLogout = async (federated: boolean) => {
-    await signOut({ redirect: !federated, callbackUrl: "/" });
+    if (federated) {
+      await signOut({ redirect: false, callbackUrl: "/" });
+    } else {
+      await signOut({ redirect: true, callbackUrl: "/" });
+    }
     if (!federated) return;
     const endSessionUrl = new URL("/application/o/golf-gaggle/end-session/", "https://pisky.id");
 
