@@ -469,15 +469,6 @@ CREATE INDEX IF NOT EXISTS fki_g
     (tournament_id ASC NULLS LAST)
     TABLESPACE pg_default;
 
--- Trigger: set_update_timestamp_trigger_tournament_course_rounds
-
--- DROP TRIGGER IF EXISTS set_update_timestamp_trigger_tournament_course_rounds ON public.tournament_course_rounds;
-
-CREATE OR REPLACE TRIGGER set_update_timestamp_trigger_tournament_course_rounds
-    BEFORE UPDATE 
-    ON public.tournament_course_rounds
-    FOR EACH ROW
-    EXECUTE FUNCTION public.trigger_set_timestamp();
 -----------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------
 
@@ -719,61 +710,61 @@ CREATE INDEX IF NOT EXISTS fki_fk_tournament_course_round_course_round_accolades
 -----------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------
 
-CREATE OR REPLACE TRIGGER set_update_timestamp_trigger_accolades
+CREATE TRIGGER set_update_timestamp_trigger_accolades
     BEFORE UPDATE 
     ON public.accolades
     FOR EACH ROW
     EXECUTE FUNCTION public.trigger_set_timestamp();
 
-CREATE OR REPLACE TRIGGER set_update_timestamp_trigger_courses
+CREATE TRIGGER set_update_timestamp_trigger_courses
     BEFORE UPDATE 
     ON public.courses
     FOR EACH ROW
     EXECUTE FUNCTION public.trigger_set_timestamp();
 
-CREATE OR REPLACE TRIGGER set_update_timestamp_trigger_gaggle_users
+CREATE TRIGGER set_update_timestamp_trigger_gaggle_users
     BEFORE UPDATE 
     ON public.gaggle_users
     FOR EACH ROW
     EXECUTE FUNCTION public.trigger_set_timestamp();
 
-CREATE OR REPLACE TRIGGER set_update_timestamp_trigger_tournament_course_rounds
+CREATE TRIGGER set_update_timestamp_trigger_tournament_course_rounds
     BEFORE UPDATE 
     ON public.tournament_course_rounds
     FOR EACH ROW
     EXECUTE FUNCTION public.trigger_set_timestamp();
 
-CREATE OR REPLACE TRIGGER set_update_timestamp_trigger_tournament_courses
+CREATE TRIGGER set_update_timestamp_trigger_tournament_courses
     BEFORE UPDATE 
     ON public.tournament_courses
     FOR EACH ROW
     EXECUTE FUNCTION public.trigger_set_timestamp();
 
-CREATE OR REPLACE TRIGGER set_update_timestamp_trigger_tournaments
+CREATE TRIGGER set_update_timestamp_trigger_tournaments
     BEFORE UPDATE 
     ON public.tournaments
     FOR EACH ROW
     EXECUTE FUNCTION public.trigger_set_timestamp();
 
-CREATE OR REPLACE TRIGGER set_update_timestamp_trigger_user_accolades
+CREATE TRIGGER set_update_timestamp_trigger_user_accolades
     BEFORE UPDATE 
     ON public.user_accolades
     FOR EACH ROW
     EXECUTE FUNCTION public.trigger_set_timestamp();
 
-CREATE OR REPLACE TRIGGER set_update_timestamp_trigger_user_course_infos
+CREATE TRIGGER set_update_timestamp_trigger_user_course_infos
     BEFORE UPDATE 
     ON public.user_course_infos
     FOR EACH ROW
     EXECUTE FUNCTION public.trigger_set_timestamp();
 
-CREATE OR REPLACE TRIGGER set_update_timestamp_trigger_user_course_round_accolades
+CREATE TRIGGER set_update_timestamp_trigger_user_course_round_accolades
     BEFORE UPDATE 
     ON public.user_course_round_accolades
     FOR EACH ROW
     EXECUTE FUNCTION public.trigger_set_timestamp();
 
-CREATE OR REPLACE TRIGGER set_update_timestamp_user_round_infos
+CREATE TRIGGER set_update_timestamp_user_round_infos
     BEFORE UPDATE 
     ON public.user_round_infos
     FOR EACH ROW
