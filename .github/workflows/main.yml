@@ -12,23 +12,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # - name: Login to Docker Hub
-      #   uses: docker/login-action@v2
-      #   with:
-      #     username: ${{ vars.DOCKER_USERNAME }}
-      #     password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
-      # - name: Build Docker image
-      #   run: docker build -t mpiskunov/golfgaggle:latest -t mpiskunov/golfgaggle:${{ github.sha }} \
-
-      # - name: Build and Push
-      #   uses: docker/build-push-action@v6
-      #   with:
-      #     context: . # Path to the Dockerfile
-      #     push: true # Push the built image to Docker Hub
-      #     tags: |
-      #       ${{ vars.DOCKER_USERNAME }}/golfgaggle:latest
-      #       ${{ vars.DOCKER_USERNAME }}/golfgaggle:${{ github.sha }}
+      - name: Build and Push
+        uses: docker/build-push-action@v6
+        with:
+          context: . # Path to the Dockerfile
+          push: true # Push the built image to Docker Hub
+          tags: |
+            ${{ vars.DOCKER_USERNAME }}/golfgaggle:latest
+            ${{ vars.DOCKER_USERNAME }}/golfgaggle:${{ github.sha }}
 
       # - name: SSH to server and deploy
       #   uses: appleboy/ssh-action@v1.2.0
