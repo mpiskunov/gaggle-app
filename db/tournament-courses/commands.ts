@@ -1,35 +1,34 @@
-import { CreateTournamentDTO, UpdateTournamentByIdDTO } from "@/models/dtos/tournaments";
+import { CreateTournamentCourseDTO, UpdateTournamentCourseByIdDTO } from "@/models/dtos/tournament-courses";
 import { execute } from "..";
 import { UUID } from "@/models/db/base-entity";
 
-const CreateTournament = async (dto: CreateTournamentDTO): Promise<UUID | null> => {
+const CreateTournamentCourse = async (dto: CreateTournamentCourseDTO): Promise<UUID | null> => {
   try {
     const queryText = `
-      INSERT INTO public.tournaments(name, year, description, created_by, code)
-      VALUES($1, $2, $3, $4, $5) RETURNING id
-    `;
-    const params: any[] = [dto.name, dto.year, dto.description, dto.createdBy, dto.code];
+    INSERT INTO public.tournament_courses(created_by, tournament_id, course_id, winner_id, "order")
+      VALUES ($1, $2, $3, $4, $5);
+  `;
+    const params: any[] = [dto.createdBy, dto.tournamentId, dto.courseId, dto.winnerId, dto.order];
     const result = await execute(queryText, params);
     return result.rows.length > 0 ? result.rows[0]["id"] : null;
   } catch (error: any) {
-    console.error("Error creating Tournament.", error);
+    console.error("Error creating TournamentCourse.", error);
     return null;
   }
 };
 
-const UpdateTournament = async (dto: UpdateTournamentByIdDTO): Promise<number> => {
+const UpdateTournamentCourse = async (dto: UpdateTournamentCourseByIdDTO): Promise<number> => {
   try {
     const updates: string[] = [];
     const params: any[] = [dto.id];
     let paramIndex = 2;
     const fields = [
-      { name: "name", value: dto.name },
-      { name: "year", value: dto.year },
-      { name: "description", value: dto.description },
+      { name: "course_id", value: dto.courseId },
+      { name: "tournament_id", value: dto.tournamentId },
       { name: "winner_id", value: dto.winnerId },
+      { name: "order", value: dto.order },
       { name: "is_deleted", value: dto.isDeleted },
       { name: "updated_by", value: dto.updatedBy },
-      { name: "code", value: dto.code },
     ];
 
     for (const field of fields) {
@@ -44,7 +43,7 @@ const UpdateTournament = async (dto: UpdateTournamentByIdDTO): Promise<number> =
     }
 
     const query = `
-      UPDATE public.tournaments
+      UPDATE public.tournament_courses
       SET ${updates.join(", ")}
       WHERE id = $1
     `;
@@ -52,9 +51,9 @@ const UpdateTournament = async (dto: UpdateTournamentByIdDTO): Promise<number> =
     const result = await execute(query, params);
     return result.rowCount ?? 0;
   } catch (error: any) {
-    console.error("Error updating Tournament.", error);
+    console.error("Error updating TournamentCourse.", error);
     return -1;
   }
 };
 
-export { CreateTournament, UpdateTournament };
+export { CreateTournamentCourse, UpdateTournamentCourse };

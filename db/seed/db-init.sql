@@ -56,6 +56,7 @@ CREATE TABLE IF NOT EXISTS public.gaggle_users
     created_date timestamp without time zone NOT NULL DEFAULT (now() AT TIME ZONE 'utc'::text),
     updated_date timestamp without time zone,
     is_deleted boolean NOT NULL DEFAULT false,
+    avatar text COLLATE pg_catalog."default",
     CONSTRAINT gaggle_users_pkey PRIMARY KEY (id)
 )
 
@@ -84,6 +85,7 @@ CREATE TABLE IF NOT EXISTS public.tournaments
     updated_date timestamp without time zone,
     is_deleted boolean NOT NULL DEFAULT false,
     winner_id uuid,
+    code character varying(50) COLLATE pg_catalog."default" NOT NULL,
     CONSTRAINT tournaments_pkey PRIMARY KEY (id),
     CONSTRAINT fk_gaggle_users_tournaments_created_by FOREIGN KEY (winner_id)
         REFERENCES public.gaggle_users (id) MATCH SIMPLE
@@ -133,7 +135,7 @@ CREATE TABLE IF NOT EXISTS public.courses
     updated_by uuid,
     created_date timestamp without time zone NOT NULL DEFAULT (now() AT TIME ZONE 'utc'::text),
     updated_date timestamp without time zone,
-    is_deleted boolean NOT NULL DEFAULT false,
+    is_deleted boolean NOT NULL DEFAULT false,  
     CONSTRAINT courses_pkey PRIMARY KEY (id),
     CONSTRAINT fk_gaggle_users_courses_created_by FOREIGN KEY (created_by)
         REFERENCES public.gaggle_users (id) MATCH SIMPLE
@@ -306,7 +308,8 @@ CREATE TABLE IF NOT EXISTS public.tournament_courses
     is_deleted boolean NOT NULL DEFAULT false,
     tournament_id uuid NOT NULL,
     course_id uuid NOT NULL,
-    winner_id uuid NOT NULL,
+    winner_id uuid,
+    "order" smallint NOT NULL,
     CONSTRAINT tournament_courses_pkey PRIMARY KEY (id),
     CONSTRAINT fk_courses_tournament_courses_course_id FOREIGN KEY (course_id)
         REFERENCES public.courses (id) MATCH SIMPLE
@@ -395,9 +398,9 @@ CREATE TABLE IF NOT EXISTS public.tournament_course_rounds
     course_round_number smallint NOT NULL,
     number_of_holes smallint NOT NULL,
     tournament_round_number smallint NOT NULL,
-    start_date time without time zone NOT NULL,
-    end_date time without time zone NOT NULL,
-    penalty_date time without time zone,
+    tournament_id uuid NOT NULL,
+    start_date date NOT NULL,
+    end_date date NOT NULL,
     CONSTRAINT tournament_course_rounds_pkey PRIMARY KEY (id),
     CONSTRAINT fk_courses_tournament_course_rounds_course_id FOREIGN KEY (course_id)
         REFERENCES public.courses (id) MATCH SIMPLE
@@ -413,6 +416,10 @@ CREATE TABLE IF NOT EXISTS public.tournament_course_rounds
         ON DELETE NO ACTION,
     CONSTRAINT fk_tournament_courses_tournament_course_rounds_tournament_cours FOREIGN KEY (tournament_course_id)
         REFERENCES public.tournament_courses (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT fk_tournaments_tournament_course_rounds_tournament_id FOREIGN KEY (tournament_id)
+        REFERENCES public.tournaments (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 )
@@ -452,6 +459,14 @@ CREATE INDEX IF NOT EXISTS fki_fk_gaggle_users_tournament_course_rounds_updated_
 CREATE INDEX IF NOT EXISTS fki_fk_tournament_courses_tournament_course_rounds_tournament_c
     ON public.tournament_course_rounds USING btree
     (tournament_course_id ASC NULLS LAST)
+    TABLESPACE pg_default;
+-- Index: fki_g
+
+-- DROP INDEX IF EXISTS public.fki_g;
+
+CREATE INDEX IF NOT EXISTS fki_g
+    ON public.tournament_course_rounds USING btree
+    (tournament_id ASC NULLS LAST)
     TABLESPACE pg_default;
 
 -----------------------------------------------------------------------------------------------
@@ -695,61 +710,61 @@ CREATE INDEX IF NOT EXISTS fki_fk_tournament_course_round_course_round_accolades
 -----------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------
 
-CREATE OR REPLACE TRIGGER set_update_timestamp_trigger_accolades
+CREATE TRIGGER set_update_timestamp_trigger_accolades
     BEFORE UPDATE 
     ON public.accolades
     FOR EACH ROW
     EXECUTE FUNCTION public.trigger_set_timestamp();
 
-CREATE OR REPLACE TRIGGER set_update_timestamp_trigger_courses
+CREATE TRIGGER set_update_timestamp_trigger_courses
     BEFORE UPDATE 
     ON public.courses
     FOR EACH ROW
     EXECUTE FUNCTION public.trigger_set_timestamp();
 
-CREATE OR REPLACE TRIGGER set_update_timestamp_trigger_gaggle_users
+CREATE TRIGGER set_update_timestamp_trigger_gaggle_users
     BEFORE UPDATE 
     ON public.gaggle_users
     FOR EACH ROW
     EXECUTE FUNCTION public.trigger_set_timestamp();
 
-CREATE OR REPLACE TRIGGER set_update_timestamp_trigger_tournament_course_rounds
+CREATE TRIGGER set_update_timestamp_trigger_tournament_course_rounds
     BEFORE UPDATE 
     ON public.tournament_course_rounds
     FOR EACH ROW
     EXECUTE FUNCTION public.trigger_set_timestamp();
 
-CREATE OR REPLACE TRIGGER set_update_timestamp_trigger_tournament_courses
+CREATE TRIGGER set_update_timestamp_trigger_tournament_courses
     BEFORE UPDATE 
     ON public.tournament_courses
     FOR EACH ROW
     EXECUTE FUNCTION public.trigger_set_timestamp();
 
-CREATE OR REPLACE TRIGGER set_update_timestamp_trigger_tournaments
+CREATE TRIGGER set_update_timestamp_trigger_tournaments
     BEFORE UPDATE 
     ON public.tournaments
     FOR EACH ROW
     EXECUTE FUNCTION public.trigger_set_timestamp();
 
-CREATE OR REPLACE TRIGGER set_update_timestamp_trigger_user_accolades
+CREATE TRIGGER set_update_timestamp_trigger_user_accolades
     BEFORE UPDATE 
     ON public.user_accolades
     FOR EACH ROW
     EXECUTE FUNCTION public.trigger_set_timestamp();
 
-CREATE OR REPLACE TRIGGER set_update_timestamp_trigger_user_course_infos
+CREATE TRIGGER set_update_timestamp_trigger_user_course_infos
     BEFORE UPDATE 
     ON public.user_course_infos
     FOR EACH ROW
     EXECUTE FUNCTION public.trigger_set_timestamp();
 
-CREATE OR REPLACE TRIGGER set_update_timestamp_trigger_user_course_round_accolades
+CREATE TRIGGER set_update_timestamp_trigger_user_course_round_accolades
     BEFORE UPDATE 
     ON public.user_course_round_accolades
     FOR EACH ROW
     EXECUTE FUNCTION public.trigger_set_timestamp();
 
-CREATE OR REPLACE TRIGGER set_update_timestamp_user_round_infos
+CREATE TRIGGER set_update_timestamp_user_round_infos
     BEFORE UPDATE 
     ON public.user_round_infos
     FOR EACH ROW
