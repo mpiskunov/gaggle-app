@@ -1,20 +1,20 @@
-import { TournamentParticipantDTO } from "@/models/dtos/tournament-participants";
+import { TournamentCommissionerDTO } from "@/models/dtos/tournament-commissioners";
 import { query } from "..";
 import { UUID } from "@/models/db/base-entity";
 
-const GetTournamentParticipantById = async (id: UUID): Promise<TournamentParticipantDTO | null> => {
+const GetTournamentCommissionerById = async (id: UUID): Promise<TournamentCommissionerDTO | null> => {
   try {
     const params: any[] = [id];
     const text = `
       SELECT * 
-      FROM public.tournament_participants
+      FROM public.tournament_commissioners
       WHERE id = $1
     `;
 
     const result = await query(text, params);
     if (result.rowCount === 0) return null;
     const item = result.rows[0];
-    const dto: TournamentParticipantDTO = {
+    const dto: TournamentCommissionerDTO = {
       id: item["id"],
       userId: item["user_id"],
       isDeleted: item["is_deleted"],
@@ -22,17 +22,17 @@ const GetTournamentParticipantById = async (id: UUID): Promise<TournamentPartici
     };
     return dto;
   } catch (error: any) {
-    console.error(`Error getting TournamentParticipant: ${id}`, error);
+    console.error(`Error getting TournamentCommissioner: ${id}`, error);
     return null;
   }
 };
 
-const GetAllTournamentParticipants = async ({ includeDeleted = false } = {}): Promise<TournamentParticipantDTO[] | []> => {
+const GetAllTournamentCommissioners = async ({ includeDeleted = false } = {}): Promise<TournamentCommissionerDTO[] | []> => {
   try {
     const params: any[] = [includeDeleted];
     const text = `
       SELECT * 
-      FROM public.tournament_participants
+      FROM public.tournament_commissioners
       WHERE is_deleted = FALSE 
       OR (is_deleted = TRUE AND $1 = TRUE);
     `;
@@ -40,7 +40,7 @@ const GetAllTournamentParticipants = async ({ includeDeleted = false } = {}): Pr
 
     if (result.rowCount == 0) return [];
 
-    const list: TournamentParticipantDTO[] = result.rows.map((item) => {
+    const list: TournamentCommissionerDTO[] = result.rows.map((item) => {
       return {
         id: item["id"],
         userId: item["user_id"],
@@ -50,9 +50,9 @@ const GetAllTournamentParticipants = async ({ includeDeleted = false } = {}): Pr
     });
     return list;
   } catch (error: any) {
-    console.error(`Error getting all TournamentParticipants.`, error);
+    console.error(`Error getting all TournamentCommissioners.`, error);
     return [];
   }
 };
 
-export { GetTournamentParticipantById, GetAllTournamentParticipants };
+export { GetTournamentCommissionerById, GetAllTournamentCommissioners };

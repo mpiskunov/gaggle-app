@@ -1,23 +1,23 @@
-import { CreateTournamentParticipantDTO, UpdateTournamentParticipantByIdDTO } from "@/models/dtos/tournament-participants";
+import { CreateTournamentCommissionerDTO, UpdateTournamentCommissionerByIdDTO } from "@/models/dtos/tournament-commissioners";
 import { execute } from "..";
 import { UUID } from "@/models/db/base-entity";
 
-const CreateTournamentParticipant = async (dto: CreateTournamentParticipantDTO): Promise<UUID | null> => {
+const CreateTournamentCommissioner = async (dto: CreateTournamentCommissionerDTO): Promise<UUID | null> => {
   try {
     const queryText = `
-    INSERT INTO public.tournament_participants(created_by, tournament_id, userId)
+    INSERT INTO public.tournament_commissioners(created_by, tournament_id, userId)
       VALUES ($1, $2, $3);
   `;
     const params: any[] = [dto.createdBy, dto.tournamentId, dto.userId];
     const result = await execute(queryText, params);
     return result.rows.length > 0 ? result.rows[0]["id"] : null;
   } catch (error: any) {
-    console.error("Error creating TournamentParticipant.", error);
+    console.error("Error creating TournamentCommissioner.", error);
     return null;
   }
 };
 
-const UpdateTournamentParticipant = async (dto: UpdateTournamentParticipantByIdDTO): Promise<number> => {
+const UpdateTournamentCommissioner = async (dto: UpdateTournamentCommissionerByIdDTO): Promise<number> => {
   try {
     const updates: string[] = [];
     const params: any[] = [dto.id];
@@ -41,7 +41,7 @@ const UpdateTournamentParticipant = async (dto: UpdateTournamentParticipantByIdD
     }
 
     const query = `
-      UPDATE public.tournament_participants
+      UPDATE public.tournament_commissioners
       SET ${updates.join(", ")}
       WHERE id = $1
     `;
@@ -49,9 +49,9 @@ const UpdateTournamentParticipant = async (dto: UpdateTournamentParticipantByIdD
     const result = await execute(query, params);
     return result.rowCount ?? 0;
   } catch (error: any) {
-    console.error("Error updating TournamentParticipant.", error);
+    console.error("Error updating TournamentCommissioner.", error);
     return -1;
   }
 };
 
-export { CreateTournamentParticipant, UpdateTournamentParticipant };
+export { CreateTournamentCommissioner, UpdateTournamentCommissioner };
