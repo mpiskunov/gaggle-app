@@ -9,7 +9,7 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import Head from "next/head";
 import theme from "@/theme";
 import { SessionProvider } from "next-auth/react";
-import GaggleHeader from "@/components/header2/Header2";
+import HeaderParent from "@/components/header/header-parent";
 config.autoAddCss = false;
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -38,7 +38,7 @@ export default function RootLayout({
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <body className={cn("font-sans antialiased bg-slate-200", fontSans.variable)}>
-              <GaggleHeader />
+              <HeaderParent />
               {children}
             </body>
           </ThemeProvider>

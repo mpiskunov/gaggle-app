@@ -16,7 +16,6 @@ import { signIn, signOut } from "next-auth/react";
 import { Session } from "next-auth";
 import { getSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-import { title } from "process";
 
 const navItems = [
   {
@@ -37,21 +36,11 @@ const navItems = [
   },
 ];
 
-const GaggleHeader = () => {
-  const [session, setSession] = useState<Session | null>(null);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const session = await getSession();
-        //console.log(session);
-        setSession(session);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+interface PageProps {
+  session: Session | null;
+}
 
-    fetchData();
-  }, []);
+const GaggleHeader = ({ session }: PageProps) => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -93,7 +82,14 @@ const GaggleHeader = () => {
             <Image src={"/gaggle-icons/GaggleLogo.png"} height={75} width={75} alt="haha" />
           </Icon>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton size="large" aria-label="account of current user" aria-controls="menu-appbar" aria-haspopup="true" onClick={handleOpenNavMenu} color="inherit">
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
               <MenuIcon />
             </IconButton>
             <Menu
@@ -145,14 +141,31 @@ const GaggleHeader = () => {
               <>
                 <IconButton onClick={handleOpenUserMenu}>
                   <Icon sx={{ fontSize: 75 }}>
-                    <Image src={`${session.user?.image ?? "/user/blank_user.png"}`} height={75} width={75} alt="haha" style={{ borderRadius: "50%" }} />
+                    <Image
+                      src={`${session.user?.image ?? "/user/blank_user.png"}`}
+                      height={75}
+                      width={75}
+                      alt="haha"
+                      style={{ borderRadius: "50%" }}
+                    />
                   </Icon>
                 </IconButton>
               </>
             ) : (
-              <Button variant="outlined" sx={{ color: "black", borderColor: "black" }} onClick={() => signIn("authentik", { redirect: true, redirectTo: "https://golfgaggle.com/" })}>
-                Login
-              </Button>
+              <>
+                <IconButton style={{ opacity: 0, cursor: "default" }}>
+                  <Icon sx={{ fontSize: 75 }}>
+                    <Image src={`/user/blank_user.png`} height={75} width={75} alt="haha" style={{ borderRadius: "50%" }} />
+                  </Icon>
+                </IconButton>
+                <Button
+                  variant="outlined"
+                  sx={{ color: "black", borderColor: "black" }}
+                  onClick={() => signIn("authentik", { redirect: true, redirectTo: "https://golfgaggle.com/" })}
+                >
+                  Login
+                </Button>
+              </>
             )}
             <Menu
               sx={{ mt: "45px" }}
