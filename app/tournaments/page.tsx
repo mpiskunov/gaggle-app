@@ -16,14 +16,14 @@ const Page = () => {
     <>
       <Container maxWidth="lg" fixed>
         <Paper elevation={10}>
-          <Grid container spacing={2} border={"1px solid black"} mt={3} maxWidth={"lg"} alignItems={"center"}>
-            <Grid size={{ xs: 12, md: 2 }} display={"flex"} sx={{ justifyContent: { xs: "center", md: "left" } }}>
+          <Grid container spacing={2} border={"1px solid black"} mt={3} alignItems={"center"}>
+            <Grid size={{ xs: 12, md: 2 }} display={"flex"} sx={{ justifyContent: { xs: "center", md: "left" } }} border={"1px solid red"}>
               <Image src={`/gaggle-icons/gaggle_open.png`} height={500} width={500} alt="haha" style={{ borderRadius: "50%" }} />
             </Grid>
-            <Grid size={{ xs: 10, md: 8 }} display={"flex"} justifyContent={"center"}>
+            <Grid size={{ xs: 10, md: 8 }} display={"flex"} justifyContent={"center"} border={"1px solid red"}>
               <Typography sx={{ fontSize: { xs: "1.5rem" } }}>Gaggle Tournament 2025</Typography>
             </Grid>
-            <Grid size={{ xs: 2 }} display={"flex"} justifyContent={"end"}>
+            <Grid size={{ xs: 2 }} display={"flex"} justifyContent={"end"} border={"1px solid red"}>
               <IconButton onClick={() => alert("clicked!")} aria-label="more options">
                 <MoreVertIcon fontSize="large" />
               </IconButton>
