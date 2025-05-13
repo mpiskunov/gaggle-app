@@ -22,8 +22,8 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       return token;
     },
     async session({ session, token }) {
-      session.external_id = token.external_id;
-      session.groups = token.groups;
+      session.external_id = token.external_id as string;
+      session.groups = token.groups as string[];
       return session;
     },
     async signIn({ user, account, profile }) {
@@ -54,4 +54,6 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     async signIn(msg) {},
   },
   providers: providers,
+  secret: process.env.AUTH_SECRET,
+  trustHost: true,
 });
