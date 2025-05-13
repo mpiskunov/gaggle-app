@@ -2,8 +2,8 @@ import Authentik from "next-auth/providers/authentik";
 import NextAuth from "next-auth";
 import type { Provider } from "next-auth/providers";
 import { GetUserFromIdentityProvider } from "./apis/identity";
-import { GetUserByExternalId } from "./db/gaggle_users/queries";
-import { CreateGaggleUser } from "./db/gaggle_users/commands";
+import { GetUserByExternalId } from "./db/gaggle-users/queries";
+import { CreateGaggleUser } from "./db/gaggle-users/commands";
 
 const providers: Provider[] = [
   Authentik({

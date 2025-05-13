@@ -710,6 +710,92 @@ CREATE INDEX IF NOT EXISTS fki_fk_tournament_course_round_course_round_accolades
 -----------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------
 
+-- Table: public.tournament_participants
+
+-- DROP TABLE IF EXISTS public.tournament_participants;
+
+CREATE TABLE IF NOT EXISTS public.tournament_participants
+(
+    id uuid NOT NULL DEFAULT uuid_generate_v4(),
+    created_by uuid NOT NULL,
+    updated_by uuid,
+    created_date timestamp without time zone NOT NULL DEFAULT (now() AT TIME ZONE 'utc'::text),
+    updated_date timestamp without time zone,
+    is_deleted boolean NOT NULL DEFAULT false,
+    tournament_id uuid NOT NULL,
+    user_id uuid NOT NULL,
+    CONSTRAINT tournament_participants_pkey PRIMARY KEY (id),
+    CONSTRAINT fk_gaggle_users_tournament_participants_created_by FOREIGN KEY (created_by)
+        REFERENCES public.gaggle_users (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT fk_gaggle_users_tournament_participants_updated_by FOREIGN KEY (updated_by)
+        REFERENCES public.gaggle_users (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT fk_gaggle_users_tournament_participants_user_id FOREIGN KEY (user_id)
+        REFERENCES public.gaggle_users (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT fk_tournaments_tournament_participants_tournament_id FOREIGN KEY (tournament_id)
+        REFERENCES public.tournaments (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.tournament_participants
+    OWNER to postgres;
+
+-- Index: fki_fk_gaggle_users_tournament_participants_created_by
+
+-- DROP INDEX IF EXISTS public.fki_fk_gaggle_users_tournament_participants_created_by;
+
+CREATE INDEX IF NOT EXISTS fki_fk_gaggle_users_tournament_participants_created_by
+    ON public.tournament_participants USING btree
+    (created_by ASC NULLS LAST)
+    TABLESPACE pg_default;
+-- Index: fki_fk_gaggle_users_tournament_participants_updated_by
+
+-- DROP INDEX IF EXISTS public.fki_fk_gaggle_users_tournament_participants_updated_by;
+
+CREATE INDEX IF NOT EXISTS fki_fk_gaggle_users_tournament_participants_updated_by
+    ON public.tournament_participants USING btree
+    (updated_by ASC NULLS LAST)
+    TABLESPACE pg_default;
+
+-- Index: fki_fk_tournaments_tournament_participants_tournament_id
+
+-- DROP INDEX IF EXISTS public.fki_fk_tournaments_tournament_participants_tournament_id;
+
+CREATE INDEX IF NOT EXISTS fki_fk_tournaments_tournament_participants_tournament_id
+    ON public.tournament_participants USING btree
+    (tournament_id ASC NULLS LAST)
+    TABLESPACE pg_default;
+
+-- Index: fki_fk_gaggle_users_tournament_participants_user_id
+
+-- DROP INDEX IF EXISTS public.fki_fk_gaggle_users_tournament_participants_user_id;
+
+CREATE INDEX IF NOT EXISTS fki_fk_gaggle_users_tournament_participants_user_id
+    ON public.tournament_participants USING btree
+    (user_id ASC NULLS LAST)
+    TABLESPACE pg_default;
+    
+-----------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------
+
+-- Trigger: set_update_timestamp_trigger_tournament_participants
+
+-- DROP TRIGGER IF EXISTS set_update_timestamp_trigger_tournament_participants ON public.tournament_participants;
+
+CREATE OR REPLACE TRIGGER set_update_timestamp_trigger_tournament_participants
+    BEFORE UPDATE 
+    ON public.tournament_participants
+    FOR EACH ROW
+    EXECUTE FUNCTION public.trigger_set_timestamp();
+
 CREATE TRIGGER set_update_timestamp_trigger_accolades
     BEFORE UPDATE 
     ON public.accolades
