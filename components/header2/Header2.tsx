@@ -16,6 +16,7 @@ import { signIn, signOut } from "next-auth/react";
 import { Session } from "next-auth";
 import { getSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import { title } from "process";
 
 const navItems = [
   {
@@ -30,22 +31,9 @@ const navItems = [
     title: "rules",
     href: "/rules",
   },
-
   {
-    title: "contact",
-    href: "/contact",
-  },
-  {
-    title: "user",
-    href: "/user",
-  },
-  {
-    title: "secret",
-    href: "/secret",
-  },
-  {
-    title: "accolades",
-    href: "/accolades",
+    title: "tournaments",
+    href: "/tournaments",
   },
 ];
 
@@ -83,7 +71,11 @@ const GaggleHeader = () => {
   };
 
   const handleLogout = async (federated: boolean) => {
-    await signOut({ redirect: !federated, callbackUrl: "/" });
+    if (federated) {
+      await signOut({ redirect: false, callbackUrl: "/" });
+    } else {
+      await signOut({ redirect: true, callbackUrl: "/" });
+    }
     if (!federated) return;
     const endSessionUrl = new URL("/application/o/golf-gaggle/end-session/", "https://pisky.id");
 
@@ -153,12 +145,12 @@ const GaggleHeader = () => {
               <>
                 <IconButton onClick={handleOpenUserMenu}>
                   <Icon sx={{ fontSize: 75 }}>
-                    <Image src={`${session.user?.image}`} height={75} width={75} alt="haha" style={{ borderRadius: "50%" }} />
+                    <Image src={`${session.user?.image ?? "/user/blank_user.png"}`} height={75} width={75} alt="haha" style={{ borderRadius: "50%" }} />
                   </Icon>
                 </IconButton>
               </>
             ) : (
-              <Button variant="outlined" sx={{ color: "black", borderColor: "black" }} onClick={() => signIn("authentik", { redirect: true, callbackUrl: "/" })}>
+              <Button variant="outlined" sx={{ color: "black", borderColor: "black" }} onClick={() => signIn("authentik", { redirect: true, redirectTo: "https://golfgaggle.com/" })}>
                 Login
               </Button>
             )}

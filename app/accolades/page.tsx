@@ -11,6 +11,7 @@ import { auth } from "@/auth";
 import { GetAllAccolades } from "@/db/accolades/queries";
 
 
+
 const AccoladesPage = async () => {
     const session = await auth();
     console.log("session", session);
