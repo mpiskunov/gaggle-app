@@ -1,8 +1,10 @@
 import { auth } from "@/auth";
-import { Container, Grid } from "@mui/material";
+import { GetTournamentsByUserExternalId } from "@/db/tournaments/queries";
+import CommissionerTournamentClientPage from "./tournaments-client";
 
 const Page = async () => {
   const session = await auth();
+  const tournaments = await GetTournamentsByUserExternalId(session?.external_id!);
 
   if (!session || !session.groups.includes("gaggle_admin"))
     // MAKE THIS RETURN A DEFAULT NOT ALLOWED PAGE.
@@ -14,22 +16,7 @@ const Page = async () => {
 
   return (
     <>
-      <Container fixed>
-        <Grid container spacing={2} border={"1px solid black"}>
-          <Grid size={8}>
-            <>size=8</>
-          </Grid>
-          <Grid size={4}>
-            <>size=4</>
-          </Grid>
-          <Grid size={4}>
-            <>size=4</>
-          </Grid>
-          <Grid size={8}>
-            <>size=8</>
-          </Grid>
-        </Grid>
-      </Container>
+      <CommissionerTournamentClientPage tournaments={tournaments} />
     </>
   );
 };
