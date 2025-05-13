@@ -4,6 +4,7 @@ export interface CreateTournamentCourseDTO {
   tournamentId: UUID;
   courseId: UUID;
   winnerId?: UUID;
+  order: number;
   createdBy: UUID;
 }
 
@@ -16,6 +17,7 @@ export interface UpdateTournamentCourseByIdDTO {
   tournamentId?: UUID;
   courseId?: UUID;
   winnerId?: UUID;
+  order?: number;
   isDeleted?: boolean;
   updatedBy: UUID;
 }
@@ -25,5 +27,6 @@ export interface TournamentCourseDTO {
   tournamentId: UUID;
   courseId: UUID;
   winnerId?: UUID;
+  order: number;
   isDeleted: boolean;
 }

@@ -4,6 +4,7 @@ export interface CreateTournamentDTO {
   name: string;
   year: string;
   description: string;
+  code: string;
   createdBy: UUID;
 }
 
@@ -17,6 +18,7 @@ export interface UpdateTournamentByIdDTO {
   year?: string;
   description?: string;
   winnerId?: UUID;
+  code?: string;
   isDeleted?: boolean;
   updatedBy: UUID;
 }
@@ -27,5 +29,6 @@ export interface TournamentDTO {
   year: string;
   description: string;
   winnerId: UUID;
+  code: string;
   isDeleted: boolean;
 }

@@ -14,7 +14,7 @@ const CreateTournamentCourseRound = async (dto: CreateTournamentCourseRoundDTO):
       tournament_round_number,
       start_date,
       end_date,
-      penalty_date)
+      tournament_id)
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);
   `;
     const params: any[] = [
@@ -26,7 +26,7 @@ const CreateTournamentCourseRound = async (dto: CreateTournamentCourseRoundDTO):
       dto.tournamentRoundNumber,
       dto.startDate,
       dto.endDate,
-      dto.penaltyDate,
+      dto.tournamentId,
     ];
     const result = await execute(queryText, params);
     return result.rows.length > 0 ? result.rows[0]["id"] : null;
@@ -44,12 +44,12 @@ const UpdateTournamentCourseRound = async (dto: UpdateTournamentCourseRoundByIdD
     const fields = [
       { name: "course_id", value: dto.courseId },
       { name: "tournament_course_id", value: dto.tournamentCourseId },
+      { name: "tournament_id", value: dto.tournamentId },
       { name: "course_round_number", value: dto.courseRoundNumber },
       { name: "number_of_holes", value: dto.numberOfHoles },
       { name: "tournament_round_number", value: dto.tournamentRoundNumber },
       { name: "start_date", value: dto.startDate },
       { name: "end_date", value: dto.endDate },
-      { name: "penalty_date", value: dto.penaltyDate },
       { name: "is_deleted", value: dto.isDeleted },
       { name: "updated_by", value: dto.updatedBy },
     ];

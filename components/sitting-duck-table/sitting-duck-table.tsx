@@ -6,57 +6,51 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Typography } from "@mui/material";
+import { Icon, Typography } from "@mui/material";
 import Image from "next/image";
 
-function createData(netTotal: number, gaggler: string, flockNumber: number) {
-  return { netTotal, gaggler, flockNumber };
-}
+const createData = (firstNameLastInitial: string) => {
+  return { firstNameLastInitial };
+};
 
-const rows = [createData(488, "Jake Eknaian", 1)];
-
-export default function BasicTable() {
+const rows = [createData("Jake E."), createData("Matt P."), createData("Ed L."), createData("Pual E.")];
+const SittingDuckTable = () => {
   return (
     <>
       <Paper sx={{ backgroundImage: "url(/bg/gaggle-bg2.png)" }}>
         <div style={{ justifyContent: "center", display: "inline-flex" }}>
-          <Image src={"/headers/pecking_order_cropped.png"} height={300} width={300} alt="couped up" />
+          <Image src={"/headers/sitting_duck_cropped.png"} height={300} width={300} alt="couped up" />
         </div>
+
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 150 }} aria-label="simple table">
             <TableHead>
               <TableRow>
                 <TableCell>
                   <Typography>
-                    <b>NET TOTAL</b>
+                    <b>GAGGLER</b>
                   </Typography>
                 </TableCell>
                 <TableCell>
                   <Typography>
-                    <b>GAGGLER</b>
+                    <b>USERNAME</b>
                   </Typography>
                 </TableCell>
-                <TableCell align="right">
+                <TableCell>
                   <Typography>
-                    <b>FLOCK</b>
-                  </Typography>
-                </TableCell>
-                <TableCell align="right">
-                  <Typography>
-                    <b>ACCOLADES</b>
+                    <b>ICON</b>
                   </Typography>
                 </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {rows.map((row, index) => (
-                <TableRow key={index} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                <TableRow key={index} sx={{ "&:last-child td, &:last-child th": { border: 0 }, "&:hover": { backgroundColor: "primary.light" } }}>
                   <TableCell component="th" scope="row">
-                    {row.netTotal}
+                    {row.firstNameLastInitial}
                   </TableCell>
-                  <TableCell>{row.gaggler}</TableCell>
-                  <TableCell align="right">{Array.from({ length: row.flockNumber }, (_, i) => "I ")}</TableCell>
-                  <TableCell align="right">Award!</TableCell>
+                  <TableCell>mpiskunov</TableCell>
+                  <TableCell>:)</TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -65,4 +59,6 @@ export default function BasicTable() {
       </Paper>
     </>
   );
-}
+};
+
+export default SittingDuckTable;
