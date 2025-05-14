@@ -30,7 +30,7 @@ export interface UpdateTournamentCourseRoundByIdDTO {
   updatedBy: UUID;
 }
 
-export interface TournamentCourseRoundDTO {
+export interface FullTournamentCourseRoundDTO {
   id: UUID;
   courseId: UUID;
   tournamentCourseId: UUID;

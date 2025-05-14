@@ -5,7 +5,7 @@ import CommissionerTournamentClientPage from "./tournaments-client";
 const Page = async () => {
   const session = await auth();
   const tournaments = await GetTournamentsByUserExternalId(session?.external_id!);
-
+  console.log(tournaments);
   if (!session || !session.groups.includes("gaggle_admin"))
     // MAKE THIS RETURN A DEFAULT NOT ALLOWED PAGE.
     return (
