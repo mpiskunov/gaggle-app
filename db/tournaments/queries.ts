@@ -1,4 +1,4 @@
-import { FullTournamentInfoDTO, TournamentDTO } from "@/models/dtos/tournaments";
+import { ActiveTournamentInfoDTO, TournamentDTO } from "@/models/dtos/tournaments";
 import { query } from "..";
 import { UUID } from "@/models/db/base-entity";
 
@@ -92,7 +92,7 @@ const GetTournamentsByUserExternalId = async (externalId: string): Promise<Tourn
   }
 };
 
-const GetAllActiveTournamentInfoById = async (id: UUID): Promise<FullTournamentInfoDTO | null> => {
+const GetAllActiveTournamentInfoById = async (id: UUID): Promise<ActiveTournamentInfoDTO | null> => {
   try {
     const params: any[] = [id];
     const tocoQuery = `
@@ -156,7 +156,7 @@ const GetAllActiveTournamentInfoById = async (id: UUID): Promise<FullTournamentI
       })
       .filter((obj) => obj.id !== null);
 
-    const dto: FullTournamentInfoDTO = {
+    const dto: ActiveTournamentInfoDTO = {
       id: tocoResult.rows[0]["t_id"],
       name: tocoResult.rows[0]["t_name"],
       year: tocoResult.rows[0]["t_year"],

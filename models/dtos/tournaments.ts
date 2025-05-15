@@ -33,7 +33,7 @@ export interface TournamentDTO {
   isDeleted: boolean;
 }
 
-export interface FullTournamentInfoDTO {
+export interface ActiveTournamentInfoDTO {
   id: UUID;
   name: string;
   year: string;
