@@ -9,8 +9,8 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   if (tournament !== null)
     return (
       <>
-        <pre>{JSON.stringify(tournament, null, 2)}</pre>
-        {/* <TournamentClientPage tournament={tournament} /> */}
+        {/* <pre>{JSON.stringify(tournament, null, 2)}</pre> */}
+        <TournamentClientPage tournament={tournament} />
       </>
     );
   return <h1>loading</h1>;

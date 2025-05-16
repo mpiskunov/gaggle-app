@@ -800,6 +800,7 @@ CREATE TABLE IF NOT EXISTS public.tournament_commissioners
     is_deleted boolean NOT NULL DEFAULT false,
     tournament_id uuid NOT NULL,
     user_id uuid NOT NULL,
+    is_co_commissioner boolean NOT NULL DEFAULT true,
     CONSTRAINT tournament_commissioners_pkey PRIMARY KEY (id),
     CONSTRAINT fk_gaggle_users_tournament_commissioners_created_by FOREIGN KEY (created_by)
         REFERENCES public.gaggle_users (id) MATCH SIMPLE

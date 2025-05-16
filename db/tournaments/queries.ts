@@ -133,7 +133,7 @@ const GetAllActiveTournamentInfoById = async (id: UUID): Promise<ActiveTournamen
       ga.id, 
       ga.email,
       concat(ga.first_name, ' ', ga.last_name) AS full_name,
-      tcomm.id AS commissioner_id, 
+      tcomm.id AS commissioner_id, tcomm.is_co_commissioner,
       tp.id AS participant_id
       FROM public.gaggle_users ga
       LEFT JOIN public.tournament_commissioners tcomm ON tcomm.user_id = ga.id AND tcomm.is_deleted = false
@@ -152,9 +152,10 @@ const GetAllActiveTournamentInfoById = async (id: UUID): Promise<ActiveTournamen
 
     const commList = userResult.rows
       .map((item: { [x: string]: any }) => {
-        return { id: item["commissioner_id"], userId: item["id"], name: item["full_name"] };
+        return { id: item["commissioner_id"], userId: item["id"], name: item["full_name"], isCoCommissioner: item["is_co_commissioner"] };
       })
       .filter((obj) => obj.id !== null);
+    console.log(commList);
 
     const dto: ActiveTournamentInfoDTO = {
       id: tocoResult.rows[0]["t_id"],

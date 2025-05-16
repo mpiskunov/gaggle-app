@@ -42,6 +42,6 @@ export interface ActiveTournamentInfoDTO {
   code: string;
   courses: { id: UUID; name: string; address: string; description: string }[];
   participants: { id: UUID; userId: UUID; name: string }[];
-  commissioners: { id: UUID; userId: UUID; name: string }[];
+  commissioners: { id: UUID; userId: UUID; name: string; isCoCommissioner: boolean }[];
   courseRounds: { courseId: UUID; courseRoundNumber: number; numberOfHoles: number; tournamentRoundNumber: number }[];
 }
