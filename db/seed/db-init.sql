@@ -85,7 +85,8 @@ CREATE TABLE IF NOT EXISTS public.tournaments
     updated_date timestamp without time zone,
     is_deleted boolean NOT NULL DEFAULT false,
     winner_id uuid,
-    code character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    code character varying(50) COLLATE pg_catalog."default" NOT NULL,  
+    is_published boolean NOT NULL DEFAULT false,
     CONSTRAINT tournaments_pkey PRIMARY KEY (id),
     CONSTRAINT fk_gaggle_users_tournaments_created_by FOREIGN KEY (winner_id)
         REFERENCES public.gaggle_users (id) MATCH SIMPLE
