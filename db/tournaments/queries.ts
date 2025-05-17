@@ -22,6 +22,7 @@ const GetTournamentById = async (id: UUID): Promise<TournamentDTO | null> => {
       description: item["description"],
       winnerId: item["winner_id"],
       code: item["code"],
+      isPublished: item["is_published"],
     };
     return dto;
   } catch (error: any) {
@@ -52,6 +53,7 @@ const GetAllTournaments = async ({ includeDeleted = false } = {}): Promise<Tourn
         description: item["description"],
         winnerId: item["winner_id"],
         code: item["code"],
+        isPublished: item["is_published"],
       };
     });
     return list;
@@ -83,6 +85,7 @@ const GetTournamentsByUserExternalId = async (externalId: string): Promise<Tourn
         description: item["description"],
         winnerId: item["winner_id"],
         code: item["code"],
+        isPublished: item["is_published"],
       };
     });
     return list;
@@ -97,7 +100,7 @@ const GetAllActiveTournamentInfoById = async (id: UUID): Promise<ActiveTournamen
     const params: any[] = [id];
     const tocoQuery = `
       SELECT 
-      tour.id AS t_id, tour.name AS t_name, tour.code AS t_code, tour.year AS t_year,
+      tour.id AS t_id, tour.name AS t_name, tour.code AS t_code, tour.year AS t_year, tour.is_published AS t_is_published,
       tour.description AS t_description, tour.winner_id AS tournament_winner_id,
       co.id AS c_id, co.name AS c_name, co.address AS c_address, co.description AS c_description, 
       tc.id, tc.winner_id AS tournament_course_winner_id, tc.order,
@@ -146,13 +149,19 @@ const GetAllActiveTournamentInfoById = async (id: UUID): Promise<ActiveTournamen
     const userResult = await query(userQuery, params);
     const pList = userResult.rows
       .map((item: { [x: string]: any }) => {
-        return { id: item["participant_id"], userId: item["id"], name: item["full_name"] };
+        return { id: item["participant_id"], userId: item["id"], name: item["full_name"], email: item["email"] };
       })
       .filter((obj) => obj.id !== null);
 
     const commList = userResult.rows
       .map((item: { [x: string]: any }) => {
-        return { id: item["commissioner_id"], userId: item["id"], name: item["full_name"], isCoCommissioner: item["is_co_commissioner"] };
+        return {
+          id: item["commissioner_id"],
+          userId: item["id"],
+          name: item["full_name"],
+          isCoCommissioner: item["is_co_commissioner"],
+          email: item["email"],
+        };
       })
       .filter((obj) => obj.id !== null);
     console.log(commList);
@@ -161,6 +170,7 @@ const GetAllActiveTournamentInfoById = async (id: UUID): Promise<ActiveTournamen
       id: tocoResult.rows[0]["t_id"],
       name: tocoResult.rows[0]["t_name"],
       year: tocoResult.rows[0]["t_year"],
+      isPublished: tocoResult.rows[0]["t_is_published"],
       description: tocoResult.rows[0]["t_description"],
       code: tocoResult.rows[0]["t_code"],
       courseRounds: courseRoundList,

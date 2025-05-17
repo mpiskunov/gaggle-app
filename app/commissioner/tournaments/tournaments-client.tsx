@@ -39,7 +39,7 @@ const CommissionerTournamentClientPage = ({ tournaments }: ClientPageProps) => {
               {tournaments.map((row) => (
                 <TableRow key={row.name} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
                   <TableCell component="th" scope="row">
-                    <Link href={`/tournaments/${row.id}`}>{row.code}</Link>
+                    <Link href={`tournaments/${row.id}`}>{row.code}</Link>
                   </TableCell>
                   <TableCell align="left">{row.code}</TableCell>
                   <TableCell align="left">{row.year}</TableCell>
